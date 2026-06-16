@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Продажи — Amazon.be & bol.com</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:#1a1a2e;}
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:white;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
+.header-left{display:flex;align-items:center;gap:14px;}
+.badges{display:flex;gap:8px;margin-bottom:6px;}
+.badge{padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;}
+.badge-amazon{background:#FF9900;color:#1a1a2e;}
+.badge-bol{background:#0000a4;color:white;}
+.header h1{font-size:19px;font-weight:600;}
+.header-meta{font-size:12px;opacity:0.6;text-align:right;line-height:1.6;}
+.controls{background:white;padding:14px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid #e8ecf0;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.period-label{font-size:13px;color:#777;font-weight:500;}
+.period-tabs{display:flex;gap:4px;}
+.ptab{padding:6px 15px;border:1.5px solid #e0e4ea;background:white;border-radius:8px;font-size:13px;cursor:pointer;font-weight:500;color:#555;transition:all 0.15s;}
+.ptab:hover{border-color:#4f46e5;color:#4f46e5;}
+.ptab.active{background:#4f46e5;border-color:#4f46e5;color:white;}
+.custom-range{display:flex;align-items:center;gap:7px;}
+.custom-range input{padding:6px 10px;border:1.5px solid #e0e4ea;border-radius:8px;font-size:13px;color:#333;outline:none;}
+.custom-range input:focus{border-color:#4f46e5;}
+.apply-btn{padding:6px 13px;background:#4f46e5;color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;}
+.apply-btn:hover{background:#3730a3;}
+.mp-filter{margin-left:auto;display:flex;gap:6px;}
+.mp-btn{padding:6px 14px;border:1.5px solid #e0e4ea;background:white;border-radius:8px;font-size:12px;cursor:pointer;font-weight:600;transition:all 0.15s;}
+.mp-btn:hover{border-color:#6b7280;}
+.mp-amazon.active{background:#FF9900;border-color:#FF9900;color:#1a1a2e;}
+.mp-bol.active{background:#0000a4;border-color:#0000a4;color:white;}
+.mp-all.active{background:#4f46e5;border-color:#4f46e5;color:white;}
+.main{padding:24px 32px;max-width:1400px;margin:0 auto;}
+.notice{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 18px;margin-bottom:18px;font-size:12px;color:#166534;display:flex;align-items:center;gap:8px;}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:14px;}
+.kpi{background:white;border-radius:14px;padding:16px 18px;border-left:3px solid #4f46e5;box-shadow:0 1px 6px rgba(0,0,0,0.07);}
+.kpi-lbl{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.kpi-val{font-size:26px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
+.kpi-delta{font-size:12px;font-weight:600;margin-bottom:6px;}
+.delta-pos{color:#10b981;}.delta-neg{color:#ef4444;}.delta-neu{color:#9ca3af;}
+.kpi-split{display:flex;gap:14px;font-size:11px;color:#888;flex-wrap:wrap;}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;}
+.dot-a{background:#FF9900;}.dot-b{background:#0000a4;}
+.card-tag{display:inline-block;background:#f0f2f5;color:#555;padding:1px 8px;border-radius:6px;font-size:10px;font-weight:600;vertical-align:middle;margin-left:6px;}
+.charts-top{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;}
+.charts-bot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.card{background:white;border-radius:14px;padding:18px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.07);}
+.card-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.ch-wrap{position:relative;height:220px;}
+.ch-wrap-sm{position:relative;height:160px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:#f8faff;color:#555;font-weight:700;padding:8px 10px;text-align:left;border-bottom:2px solid #e8ecf0;font-size:11px;text-transform:uppercase;letter-spacing:0.3px;}
+td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
+.month-row:hover td{background:#fafbff;}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr);}.charts-top,.charts-bot{grid-template-columns:1fr;}.main{padding:16px;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div>
+      <div class="badges">
+        <span class="badge badge-amazon">Amazon.be</span>
+        <span class="badge badge-bol">bol.com</span>
+      </div>
+      <h1>Дашборд продаж</h1>
+    </div>
+  </div>
+  <div class="header-meta">Обновлено: <span id="upd-time">—</span><br>Источник: CSV-выгрузки + API bol.com + PDF-инвойсы</div>
+</div>
+<div class="controls">
+  <span class="period-label">Период:</span>
+  <div class="period-tabs">
+    <button class="ptab" id="tab-today" onclick="setPeriod('today')">Сегодня</button>
+    <button class="ptab" id="tab-week" onclick="setPeriod('week')">Неделя</button>
+    <button class="ptab active" id="tab-month" onclick="setPeriod('month')">Месяц</button>
+    <button class="ptab" id="tab-q" onclick="setPeriod('q')">Квартал</button>
+    <button class="ptab" id="tab-all" onclick="setPeriod('all')">Всё время</button>
+  </div>
+  <div class="custom-range">
+    <input type="date" id="dt-from" value="2026-06-01">
+    <span style="color:#aaa;">—</span>
+    <input type="date" id="dt-to" value="2026-06-15">
+    <button class="apply-btn" onclick="setPeriod('custom')">Применить</button>
+  </div>
+  <div class="mp-filter">
+    <button class="mp-btn mp-all active" id="btn-all" onclick="setMP('all')">Все</button>
+    <button class="mp-btn mp-amazon" id="btn-amazon" onclick="setMP('amazon')">Amazon.be</button>
+    <button class="mp-btn mp-bol" id="btn-bol" onclick="setMP('bol')">bol.com</button>
+  </div>
+</div>
+<div class="main">
+  <div class="notice">✅ <strong>Комиссии bol.com — реальные данные из 30 PDF-инвойсов</strong> (окт 2025 — июн 2026). Выручка, комиссии и реклама — из официальных счетов bol.com.</div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-color:#4f46e5">
+      <div class="kpi-lbl">💶 Выручка</div>
+      <div class="kpi-val" id="v-rev">—</div>
+      <div class="kpi-delta" id="d-rev">—</div>
+      <div class="kpi-split"><span><span class="dot dot-a"></span>AMZ: <b id="v-rev-a">—</b></span><span><span class="dot dot-b"></span>BOL: <b id="v-rev-b">—</b></span></div>
+    </div>
+    <div class="kpi" style="border-color:#0000a4">
+      <div class="kpi-lbl">📦 Заказы / единицы</div>
+      <div class="kpi-val" id="v-ord">—</div>
+      <div class="kpi-delta" id="d-ord">—</div>
+      <div class="kpi-split"><span><span class="dot dot-a"></span>AMZ: <b id="v-ord-a">—</b></span><span><span class="dot dot-b"></span>BOL: <b id="v-ord-b">—</b></span></div>
+    </div>
+    <div class="kpi" style="border-color:#10b981">
+      <div class="kpi-lbl">🛒 Средний чек</div>
+      <div class="kpi-val" id="v-avg">—</div>
+      <div class="kpi-delta" id="d-avg">—</div>
+      <div class="kpi-split"><span><span class="dot dot-a"></span>AMZ: <b id="v-avg-a">—</b></span><span><span class="dot dot-b"></span>BOL: <b id="v-avg-b">—</b></span></div>
+    </div>
+    <div class="kpi" style="border-color:#f59e0b">
+      <div class="kpi-lbl">👁 Просмотры (bol.com)</div>
+      <div class="kpi-val" id="v-vis">—</div>
+      <div class="kpi-delta" id="d-vis">—</div>
+      <div class="kpi-split"><span>Конверсия: <b id="v-conv">—</b></span></div>
+    </div>
+    <div class="kpi" style="border-color:#6366f1">
+      <div class="kpi-lbl">🏛 НДС 21%</div>
+      <div class="kpi-val" id="v-vat">—</div>
+      <div class="kpi-delta delta-neu" id="d-vat">incl. в выручке</div>
+      <div class="kpi-split">
+        <span><span class="dot dot-a"></span>AMZ: <b id="v-vat-a">—</b></span>
+        <span><span class="dot dot-b"></span>BOL: <b id="v-vat-b">—</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="kpi-row" style="margin-bottom:20px;">
+    <div class="kpi" style="border-left:3px solid #0000a4;">
+      <div class="kpi-lbl" style="color:#0000a4;">🏦 Комиссии bol.com <span class="card-tag" style="background:#dcfce7;color:#166534;">● PDF · реальные</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-bol-comm">—</div>
+      <div class="kpi-split"><span>ставка: <b id="v-bol-comm-pct">15,4%</b></span><span style="margin-left:8px;" id="v-bol-comm-src">из счетов bol.com</span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #10b981;">
+      <div class="kpi-lbl" style="color:#10b981;">💰 Нетто BOL <span class="card-tag" style="background:#dcfce7;color:#166534;">после комиссии</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-bol-net">—</div>
+      <div class="kpi-split"><span>gross − комиссия bol.com</span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #ef4444;">
+      <div class="kpi-lbl" style="color:#dc2626;">📢 Реклама bol.com <span class="card-tag" style="background:#fee2e2;color:#991b1b;">Sponsored Products</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-bol-adv">—</div>
+      <div class="kpi-split"><span>отдельный счёт за период</span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #7c3aed;">
+      <div class="kpi-lbl" style="color:#7c3aed;">💎 Итого чистыми BOL <span class="card-tag" style="background:#ede9fe;color:#5b21b6;">после рекламы</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-bol-final">—</div>
+      <div class="kpi-split"><span>нетто − реклама</span></div>
+    </div>
+  </div>
+  <div class="charts-top">
+    <div class="card">
+      <div class="card-title">Динамика выручки (по дням) <span class="card-tag" id="chart-period-tag">за период</span></div>
+      <div class="ch-wrap"><canvas id="lineChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Доля маркетплейсов <span class="card-tag">выручка</span></div>
+      <div class="ch-wrap"><canvas id="pieChart"></canvas></div>
+    </div>
+  </div>
+  <div class="charts-bot">
+    <div class="card">
+      <div class="card-title">Выручка по месяцам <span class="card-tag">Amazon.be vs bol.com</span></div>
+      <div class="ch-wrap-sm"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Заказы по месяцам <span class="card-tag">Amazon.be vs bol.com</span></div>
+      <div class="ch-wrap-sm"><canvas id="ordChart"></canvas></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-title">↩️ Возвраты — bol.com <span class="card-tag" style="background:#dcfce7;color:#166534;">● API · живые данные</span></div>
+    <table>
+      <thead><tr><th>Дата возврата</th><th>Заказ</th><th>Причина</th><th>Комментарий покупателя</th><th>Результат</th></tr></thead>
+      <tbody>
+        <tr class="month-row"><td><strong>11/02/2026</strong></td><td style="font-size:11px;color:#999;font-family:monospace;">C0000DT09T</td><td><span style="background:#fee2e2;color:#991b1b;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Повреждение при доставке</span></td><td style="font-size:12px;color:#555;">Упаковка повреждена; недостают сменные блоки</td><td><span style="background:#fef3c7;color:#92400e;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Отменён покупателем</span></td></tr>
+        <tr class="month-row"><td><strong>21/01/2026</strong></td><td style="font-size:11px;color:#999;font-family:monospace;">A000CADFCD</td><td><span style="background:#fee2e2;color:#991b1b;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Ошибочный заказ</span></td><td style="font-size:12px;color:#555;">Думал, что заказывает другой товар (швабру)</td><td><span style="background:#dcfce7;color:#166534;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Возврат получен</span></td></tr>
+        <tr class="month-row"><td><strong>12/12/2025</strong></td><td style="font-size:11px;color:#999;font-family:monospace;">A000CN8PUU</td><td><span style="background:#fef9c3;color:#713f12;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Товар не понадобился</span></td><td style="font-size:12px;color:#555;">Товар оказался не нужен</td><td><span style="background:#dcfce7;color:#166534;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">Возврат получен</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-title">💶 Расчётные периоды bol.com — реальные данные
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="card-tag" style="background:#dcfce7;color:#166534;">● 30 PDF-инвойсов</span>
+        <span class="card-tag">окт 2025 — июн 2026</span>
+      </div>
+    </div>
+    <table>
+      <thead><tr>
+        <th>Период</th><th style="text-align:right;">Заказов</th>
+        <th style="text-align:right;">Выручка (incl.НДС)</th>
+        <th style="text-align:right;">Комиссия</th><th style="text-align:right;">% комм.</th>
+        <th style="text-align:right;">Нетто</th><th style="text-align:right;">Реклама</th>
+        <th style="text-align:right;">Итого чистыми</th>
+      </tr></thead>
+      <tbody id="settlements-tbody"></tbody>
+      <tfoot>
+        <tr style="font-weight:700;background:#f8faff;border-top:2px solid #e0e4ea;">
+          <td>ИТОГО</td>
+          <td style="text-align:right;" id="st-tot-orders">—</td>
+          <td style="text-align:right;" id="st-tot-rev">—</td>
+          <td style="text-align:right;" id="st-tot-comm">—</td>
+          <td style="text-align:right;" id="st-tot-pct">—</td>
+          <td style="text-align:right;" id="st-tot-net">—</td>
+          <td style="text-align:right;" id="st-tot-adv">—</td>
+          <td style="text-align:right;" id="st-tot-final">—</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">Детализация по месяцам</div>
+    <table>
+      <thead><tr>
+        <th>Месяц</th><th>Amazon выручка</th><th>BOL выручка</th><th>Итого выручка</th>
+        <th>Amazon заказы</th><th>BOL заказы</th><th>Итого заказы</th><th>Средний чек</th><th>Тренд</th>
+      </tr></thead>
+      <tbody id="monthly-tbody"></tbody>
+    </table>
+  </div>
+</div>
+<script>
+// DATA
+const DATES=["2025-11-02","2025-11-03","2025-11-04","2025-11-05","2025-11-06","2025-11-07","2025-11-08","2025-11-09","2025-11-10","2025-11-11","2025-11-12","2025-11-13","2025-11-14","2025-11-15","2025-11-16","2025-11-17","2025-11-18","2025-11-19","2025-11-20","2025-11-21","2025-11-22","2025-11-23","2025-11-24","2025-11-25","2025-11-26","2025-11-27","2025-11-28","2025-11-29","2025-11-30","2025-12-01","2025-12-02","2025-12-03","2025-12-04","2025-12-05","2025-12-06","2025-12-07","2025-12-08","2025-12-09","2025-12-10","2025-12-11","2025-12-12","2025-12-13","2025-12-14","2025-12-15","2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-20","2025-12-21","2025-12-22","2025-12-23","2025-12-24","2025-12-25","2025-12-26","2025-12-27","2025-12-28","2025-12-29","2025-12-30","2025-12-31","2026-01-01","2026-01-02","2026-01-03","2026-01-04","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-10","2026-01-11","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-17","2026-01-18","2026-01-19","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-24","2026-01-25","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-01-31","2026-02-01","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-07","2026-02-08","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-14","2026-02-15","2026-02-16","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-21","2026-02-22","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-02-28","2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31","2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-18","2026-04-19","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-25","2026-04-26","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-01","2026-05-02","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-09","2026-05-10","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-16","2026-05-17","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-13","2026-06-14","2026-06-15"];
+const BOL_REV=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,27.99,0.0,0.0,0.0,0.0,27.99,27.99,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,15.98,0.0,0.0,15.98,47.95,0.0,31.97,59.96,15.98,0.0,0.0,0.0,15.98,47.95,0.0,15.98,31.97,15.98,31.97,15.98,0.0,15.98,0.0,0.0,0.0,0.0,0.0,0.0,27.99,27.99,27.99,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,55.97,0.0,0.0,0.0,27.99,0.0,27.99,55.97,0.0,0.0,0.0,0.0,55.97,27.99,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,27.99,0.0,27.99,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,27.99,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,55.97,0.0,0.0,27.99,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,27.99,0.0,55.97,0.0,0.0,0.0,0.0,55.97,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,27.99,0.0,27.99,0.0,0.0,0.0,27.99,27.99,0.0,105.95,0.0,0.0,27.99];
+const BOL_ORD=[0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,2,0,2,3,1,0,0,0,1,3,0,1,2,1,2,1,0,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,2,0,0,0,1,0,1,2,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,1,0,2,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,1,0,3,0,0,1];
+const BOL_VIS=[0,8,5,8,4,5,3,3,2,5,1,3,3,5,6,1,2,11,2,5,3,2,6,1,5,7,13,17,112,105,73,89,91,82,92,113,92,98,88,91,47,12,16,20,11,9,10,10,13,4,15,5,4,5,8,5,11,11,6,4,11,12,11,9,14,5,12,5,9,7,7,9,2,6,5,4,5,3,8,3,10,7,8,7,10,3,7,6,3,6,3,3,6,7,6,3,4,5,6,3,4,6,5,5,0,3,10,6,3,1,3,2,8,5,5,2,5,4,5,2,5,1,4,3,6,5,5,7,1,5,2,3,3,5,3,8,2,2,1,4,5,8,5,5,6,5,0,5,2,1,4,6,5,9,1,6,4,8,4,6,4,3,2,9,1,8,10,4,6,19,4,6,4,3,4,3,4,6,3,3,5,5,7,11,7,4,2,9,2,1,4,8,7,5,4,5,3,5,5,4,3,3,1,4,3,3,1,3,6,4,6,5,4,2,10,10,8,5,6,7,5,4,8,4,4,0];
+const AMZ_REV=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27.99,0,0,0,0,0,0,0,0,0,0,0,0,0,39.98,0,19.99,0,39.98,79.96,19.99,59.97,0,19.99,19.99,19.99,19.99,0,0,19.99,19.99,0,0,0,0,19.99,0,19.99,0,0,0,0,0,0,39.98,0,19.99,0,39.98,19.99,19.99,0,0,39.98,19.99,39.98,39.98,19.99,0,0,0,0,19.99,0,0,0,39.98,0,0,0,0,19.99,0,19.99,0,39.98,19.99,0,19.99,19.99,0,0,0,0,39.98,0,0,0,0,0,0,19.99,19.99,0,0,39.98,0,0,0,0,0,0,0,0,0,0,0,0,0,19.99,0,0,19.99,0,0,0,19.99,0,0,0,0,0,19.99,22.99,0,0,22.99,51.08,0,51.98,0,0,0,0,25.99,25.99,0,0,0,25.99,0,51.98,25.99,0,51.98,0,0,0,0,0,0,0,0,25.99,0,0,0,25.99,0,25.99,0,0,26.99,0,0,26.99,26.99,0,26.99,0,0,0,0,0,26.99,26.99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26.99,0,0,0,0,27.99,0,0,0,0,0,27.99,0,0];
+const AMZ_ORD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,2,4,1,3,0,1,1,1,1,0,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,2,0,1,0,2,1,1,0,0,2,1,2,2,1,0,0,0,0,1,0,0,0,2,0,0,0,0,1,0,1,0,2,1,0,1,1,0,0,0,0,2,0,0,0,0,0,0,1,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,2,0,2,0,0,0,0,1,1,0,0,0,1,0,2,1,0,2,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0,1,1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0];
+const MONTHLY={"2025-11":{bol_rev:167.92,bol_ord:6,amz_rev:27.99,amz_ord:1},"2025-12":{bol_rev:379.64,bol_ord:22,amz_rev:419.79,amz_ord:21},"2026-01":{bol_rev:363.83,bol_ord:12,amz_rev:379.81,amz_ord:19},"2026-02":{bol_rev:167.92,bol_ord:6,amz_rev:239.88,amz_ord:12},"2026-03":{bol_rev:167.92,bol_ord:5,amz_rev:229.00,amz_ord:10},"2026-04":{bol_rev:195.91,bol_ord:7,amz_rev:285.89,amz_ord:11},"2026-05":{bol_rev:111.95,bol_ord:4,amz_rev:161.94,amz_ord:6},"2026-06":{bol_rev:245.88,bol_ord:8,amz_rev:82.97,amz_ord:3}};
+const MONTH_LABELS={"2025-11":"ноябрь 25","2025-12":"декабрь 25","2026-01":"январь 26","2026-02":"февраль 26","2026-03":"март 26","2026-04":"апрель 26","2026-05":"май 26","2026-06":"июнь 26"};
+const BOL_SETTLEMENTS=[
+  {from:"2025-10-08",to:"2025-10-24",period:"08 okt – 24 okt 2025",rev:27.99,comm:4.32,net:23.67,adv:0.00,final:23.67,orders:1},
+  {from:"2025-10-25",to:"2025-11-07",period:"25 okt – 07 nov 2025",rev:55.98,comm:8.64,net:47.34,adv:32.99,final:14.35,orders:2},
+  {from:"2025-11-08",to:"2025-11-23",period:"08 nov – 23 nov 2025",rev:139.95,comm:21.60,net:118.35,adv:10.72,final:107.63,orders:5},
+  {from:"2025-11-24",to:"2025-12-07",period:"24 nov – 07 dec 2025",rev:43.98,comm:6.70,net:37.28,adv:14.88,final:22.40,orders:2},
+  {from:"2025-12-08",to:"2025-12-24",period:"08 dec – 24 dec 2025",rev:331.80,comm:52.88,net:278.92,adv:111.21,final:167.71,orders:12},
+  {from:"2025-12-25",to:"2026-01-07",period:"25 dec 2025 – 07 jan 2026",rev:127.95,comm:19.66,net:108.29,adv:16.93,final:91.36,orders:5},
+  {from:"2026-01-08",to:"2026-01-24",period:"08 jan – 24 jan 2026",rev:223.92,comm:38.20,net:185.72,adv:28.44,final:157.28,orders:8},
+  {from:"2026-01-25",to:"2026-02-07",period:"25 jan – 07 feb 2026",rev:83.97,comm:12.96,net:71.01,adv:21.81,final:49.20,orders:3},
+  {from:"2026-02-08",to:"2026-02-21",period:"08 feb – 21 feb 2026",rev:83.97,comm:12.96,net:71.01,adv:13.08,final:57.93,orders:3},
+  {from:"2026-02-22",to:"2026-03-07",period:"22 feb – 07 mrt 2026",rev:27.99,comm:4.32,net:23.67,adv:10.70,final:12.97,orders:1},
+  {from:"2026-03-08",to:"2026-03-24",period:"08 mrt – 24 mrt 2026",rev:111.96,comm:17.28,net:94.68,adv:12.49,final:82.19,orders:4},
+  {from:"2026-03-25",to:"2026-04-07",period:"25 mrt – 07 apr 2026",rev:111.96,comm:17.28,net:94.68,adv:12.27,final:82.41,orders:4},
+  {from:"2026-04-08",to:"2026-04-23",period:"08 apr – 23 apr 2026",rev:111.96,comm:17.28,net:94.68,adv:14.48,final:80.20,orders:4},
+  {from:"2026-04-24",to:"2026-05-07",period:"24 apr – 07 mei 2026",rev:0.00,comm:0.00,net:0.00,adv:8.33,final:-8.33,orders:0},
+  {from:"2026-05-08",to:"2026-05-24",period:"08 mei – 24 mei 2026",rev:83.97,comm:12.96,net:71.01,adv:9.84,final:61.17,orders:3},
+  {from:"2026-05-25",to:"2026-06-07",period:"25 mei – 07 jun 2026",rev:83.97,comm:12.96,net:71.01,adv:7.85,final:63.16,orders:3}
+];
+const BOL_COMM_RATE=0.154;
+function getSettlementForRange(start,end){
+  let totRev=0,totComm=0,totNet=0,totAdv=0,totFinal=0,matched=0;
+  for(const s of BOL_SETTLEMENTS){
+    if(s.to>=start&&s.from<=end){totRev+=s.rev;totComm+=s.comm;totNet+=s.net;totAdv+=s.adv;totFinal+=s.final;matched++;}
+  }
+  return{rev:totRev,comm:totComm,net:totNet,adv:totAdv,final:totFinal,matched};
+}
+let curPeriod='month',curMP='all';
+let lineChart,pieChart,barChart,ordChart;
+document.getElementById('upd-time').textContent=new Date().toLocaleString('ru-RU');
+function eur(v){return'€'+parseFloat(v).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+function setDelta(id,cur,prev){
+  const el=document.getElementById(id);if(!el)return;
+  if(!prev||prev===0){el.textContent='—';el.className='kpi-delta delta-neu';return;}
+  const pct=((cur-prev)/prev*100).toFixed(1);
+  const sign=pct>=0?'▲':'▼';
+  el.textContent=sign+' '+Math.abs(pct)+'% vs пред. период';
+  el.className='kpi-delta '+(pct>=0?'delta-pos':'delta-neg');
+}
+function fmtDateRu(d){
+  if(!d)return'';
+  const[y,m,day]=d.split('-');
+  const months=['','янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  return parseInt(day)+' '+months[parseInt(m)]+' '+y;
+}
+function getPeriodRange(p){
+  const today='2026-06-15';
+  if(p==='today')return{start:today,end:today};
+  if(p==='week')return{start:'2026-06-09',end:today};
+  if(p==='month')return{start:'2026-06-01',end:today};
+  if(p==='q')return{start:'2026-04-01',end:today};
+  if(p==='all')return{start:DATES[0],end:today};
+  return{start:document.getElementById('dt-from').value,end:document.getElementById('dt-to').value};
+}
+function getPrevRange(start,end){
+  const s=new Date(start),e=new Date(end);
+  const diff=e-s;
+  const ps=new Date(s-diff-86400000),pe=new Date(s.getTime()-86400000);
+  return{start:ps.toISOString().slice(0,10),end:pe.toISOString().slice(0,10)};
+}
+function sumRange(start,end){
+  let aRev=0,bRev=0,aOrd=0,bOrd=0,bVis=0;
+  for(let i=0;i<DATES.length;i++){
+    if(DATES[i]>=start&&DATES[i]<=end){aRev+=AMZ_REV[i]||0;bRev+=BOL_REV[i]||0;aOrd+=AMZ_ORD[i]||0;bOrd+=BOL_ORD[i]||0;bVis+=BOL_VIS[i]||0;}
+  }
+  return{aRev,bRev,aOrd,bOrd,bVis};
+}
+function setPeriod(p){
+  curPeriod=p;
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  const t=document.getElementById('tab-'+p);if(t)t.classList.add('active');
+  render();
+}
+function setMP(mp){
+  curMP=mp;
+  document.querySelectorAll('.mp-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('btn-'+mp);if(btn)btn.classList.add('active');
+  render();
+}
+function render(){
+  const{start,end}=getPeriodRange(curPeriod);
+  const{start:ps,end:pe}=getPrevRange(start,end);
+  const cur=sumRange(start,end),prev=sumRange(ps,pe);
+  let rev,ord,revA,revB,ordA,ordB,pRev,pOrd;
+  if(curMP==='amazon'){rev=cur.aRev;ord=cur.aOrd;revA=cur.aRev;revB=0;ordA=cur.aOrd;ordB=0;pRev=prev.aRev;pOrd=prev.aOrd;}
+  else if(curMP==='bol'){rev=cur.bRev;ord=cur.bOrd;revA=0;revB=cur.bRev;ordA=0;ordB=cur.bOrd;pRev=prev.bRev;pOrd=prev.bOrd;}
+  else{rev=cur.aRev+cur.bRev;ord=cur.aOrd+cur.bOrd;revA=cur.aRev;revB=cur.bRev;ordA=cur.aOrd;ordB=cur.bOrd;pRev=prev.aRev+prev.bRev;pOrd=prev.aOrd+prev.bOrd;}
+  const avg=ord>0?rev/ord:0,pAvg=pOrd>0?pRev/pOrd:0;
+  setText('v-rev',eur(rev));setDelta('d-rev',rev,pRev);
+  setText('v-rev-a',eur(revA));setText('v-rev-b',eur(revB));
+  setText('v-ord',ord);setDelta('d-ord',ord,pOrd);
+  setText('v-ord-a',ordA);setText('v-ord-b',ordB);
+  setText('v-avg',eur(avg));setDelta('d-avg',avg,pAvg);
+  setText('v-avg-a',ordA>0?eur(revA/ordA):'—');
+  setText('v-avg-b',ordB>0?eur(revB/ordB):'—');
+  setText('v-vis',cur.bVis.toLocaleString('ru'));setDelta('d-vis',cur.bVis,prev.bVis);
+  setText('v-conv',cur.bVis>0?((cur.bOrd/cur.bVis)*100).toFixed(1)+'%':'—');
+  // НДС 21% (цены incl. VAT → НДС = rev × 21/121)
+  const vatA=revA*21/121, vatB=revB*21/121, vatTot=(revA+revB)*21/121;
+  setText('v-vat', eur(vatTot));
+  setText('v-vat-a', eur(vatA));
+  setText('v-vat-b', eur(vatB));
+  const st=getSettlementForRange(start,end);
+  if(st.matched>0){
+    const pct=st.rev>0?(st.comm/st.rev*100).toFixed(1)+'%':'—';
+    setText('v-bol-comm',eur(st.comm));setText('v-bol-net',eur(st.net));
+    setText('v-bol-adv',eur(st.adv));setText('v-bol-final',eur(st.final));
+    setText('v-bol-comm-pct',pct);
+    setText('v-bol-comm-src',st.matched+' период'+(st.matched>1?'а':'')+' · PDF');
+  }else{
+    const comm=cur.bRev*BOL_COMM_RATE;
+    setText('v-bol-comm',eur(comm));setText('v-bol-net',eur(cur.bRev-comm));
+    setText('v-bol-adv','—');setText('v-bol-final','—');
+    setText('v-bol-comm-pct','~15,4%');setText('v-bol-comm-src','оценка');
+  }
+  setText('chart-period-tag',fmtDateRu(start)+' — '+fmtDateRu(end));
+  updateLineChart(start,end);updatePieChart(revA,revB);
+  updateBarChart();updateOrdChart();
+  renderSettlementsTable();renderMonthlyTable();
+}
+function initCharts(){
+  const dOpts={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12,padding:10}}}};
+  lineChart=new Chart(document.getElementById('lineChart'),{type:'line',data:{labels:[],datasets:[]},options:{...dOpts,scales:{x:{grid:{display:false},ticks:{font:{size:10},maxTicksLimit:14,maxRotation:45}},y:{grid:{color:'#f0f2f5'},ticks:{font:{size:11},callback:v=>'€'+v.toLocaleString('de-DE')}}}}});
+  pieChart=new Chart(document.getElementById('pieChart'),{type:'doughnut',data:{labels:['Amazon.be','bol.com'],datasets:[{data:[1,1],backgroundColor:['#FF9900','#0000a4'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{font:{size:12},padding:16}},tooltip:{callbacks:{label:ctx=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return ctx.label+': '+eur(ctx.parsed)+' ('+Math.round(ctx.parsed/t*100)+'%)';}}}}}});
+  barChart=new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:[],datasets:[]},options:{...dOpts,scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'#f0f2f5'},ticks:{font:{size:11},callback:v=>'€'+v}}}}});
+  ordChart=new Chart(document.getElementById('ordChart'),{type:'bar',data:{labels:[],datasets:[]},options:{...dOpts,scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'#f0f2f5'},ticks:{font:{size:11},stepSize:1}}}}});
+}
+function updateLineChart(start,end){
+  const labels=[],amzD=[],bolD=[];
+  for(let i=0;i<DATES.length;i++){
+    if(DATES[i]>=start&&DATES[i]<=end){labels.push(DATES[i].slice(5));amzD.push(AMZ_REV[i]||0);bolD.push(BOL_REV[i]||0);}
+  }
+  lineChart.data.labels=labels;
+  lineChart.data.datasets=[
+    {label:'Amazon.be',data:amzD,borderColor:'#FF9900',backgroundColor:'rgba(255,153,0,0.07)',tension:0.3,pointRadius:2,borderWidth:2,fill:true},
+    {label:'bol.com',data:bolD,borderColor:'#0000a4',backgroundColor:'rgba(0,0,164,0.06)',tension:0.3,pointRadius:2,borderWidth:2,fill:true}
+  ];
+  lineChart.update('none');
+}
+function updatePieChart(revA,revB){pieChart.data.datasets[0].data=[revA||0.01,revB||0.01];pieChart.update('none');}
+function updateBarChart(){
+  const months=Object.keys(MONTHLY);
+  barChart.data.labels=months.map(m=>MONTH_LABELS[m]||m);
+  barChart.data.datasets=[
+    {label:'Amazon.be',data:months.map(m=>MONTHLY[m].amz_rev||0),backgroundColor:'#FF9900',borderRadius:4},
+    {label:'bol.com',data:months.map(m=>MONTHLY[m].bol_rev||0),backgroundColor:'#0000a4',borderRadius:4}
+  ];
+  barChart.update('none');
+}
+function updateOrdChart(){
+  const months=Object.keys(MONTHLY);
+  ordChart.data.labels=months.map(m=>MONTH_LABELS[m]||m);
+  ordChart.data.datasets=[
+    {label:'Amazon.be',data:months.map(m=>MONTHLY[m].amz_ord||0),backgroundColor:'#FF9900',borderRadius:4},
+    {label:'bol.com',data:months.map(m=>MONTHLY[m].bol_ord||0),backgroundColor:'#0000a4',borderRadius:4}
+  ];
+  ordChart.update('none');
+}
+function renderSettlementsTable(){
+  const tbody=document.getElementById('settlements-tbody');if(!tbody)return;
+  let totOrders=0,totRev=0,totComm=0,totNet=0,totAdv=0,totFinal=0,rows='';
+  for(const s of BOL_SETTLEMENTS){
+    const pct=s.rev>0?(s.comm/s.rev*100).toFixed(1)+'%':'—';
+    const fc=s.final>=0?'#166534':'#991b1b',fbg=s.final>=0?'#f0fdf4':'#fef2f2';
+    rows+=`<tr class="month-row">
+      <td style="font-size:12px;white-space:nowrap;">${s.period}</td>
+      <td style="text-align:right;">${s.orders}</td>
+      <td style="text-align:right;font-weight:600;">${eur(s.rev)}</td>
+      <td style="text-align:right;color:#dc2626;">${eur(s.comm)}</td>
+      <td style="text-align:right;color:#6b7280;font-size:12px;">${pct}</td>
+      <td style="text-align:right;">${eur(s.net)}</td>
+      <td style="text-align:right;color:#ea580c;">${s.adv>0?'−'+eur(s.adv):'—'}</td>
+      <td style="text-align:right;font-weight:700;background:${fbg};color:${fc};">${eur(s.final)}</td>
+    </tr>`;
+    totOrders+=s.orders;totRev+=s.rev;totComm+=s.comm;totNet+=s.net;totAdv+=s.adv;totFinal+=s.final;
+  }
+  tbody.innerHTML=rows;
+  const totPct=totRev>0?(totComm/totRev*100).toFixed(1)+'%':'—';
+  setText('st-tot-orders',totOrders);setText('st-tot-rev',eur(totRev));
+  setText('st-tot-comm',eur(totComm));setText('st-tot-pct',totPct);
+  setText('st-tot-net',eur(totNet));setText('st-tot-adv','−'+eur(totAdv));
+  const fc=totFinal>=0?'#166534':'#991b1b';
+  document.getElementById('st-tot-final').innerHTML='<span style="color:'+fc+';font-weight:700;">'+eur(totFinal)+'</span>';
+}
+function renderMonthlyTable(){
+  const months=Object.keys(MONTHLY);let rows='',prevRev=null;
+  for(const m of months){
+    const d=MONTHLY[m],totalRev=(d.amz_rev||0)+(d.bol_rev||0),totalOrd=(d.amz_ord||0)+(d.bol_ord||0);
+    const avg=totalOrd>0?totalRev/totalOrd:0;
+    let trend='';
+    if(prevRev!==null){trend=totalRev>prevRev?'<span style="color:#10b981;font-weight:700;">▲</span>':totalRev<prevRev?'<span style="color:#ef4444;font-weight:700;">▼</span>':'<span style="color:#9ca3af;">—</span>';}
+    prevRev=totalRev;
+    rows+=`<tr class="month-row"><td><strong>${MONTH_LABELS[m]||m}</strong></td><td>${eur(d.amz_rev||0)}</td><td>${eur(d.bol_rev||0)}</td><td style="font-weight:700;">${eur(totalRev)}</td><td>${d.amz_ord||0}</td><td>${d.bol_ord||0}</td><td style="font-weight:700;">${totalOrd}</td><td>${avg>0?eur(avg):'—'}</td><td style="text-align:center;">${trend}</td></tr>`;
+  }
+  document.getElementById('monthly-tbody').innerHTML=rows;
+}
+initCharts();
+render();
+</script>
+</body>
+</ht
