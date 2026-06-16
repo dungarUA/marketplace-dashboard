@@ -1,0 +1,1676 @@
+{
+  "fetched_at": "2026-06-16T13:46:37.126314",
+  "orders": [
+    {
+      "orderId": "C0006KNTLL",
+      "orderPlacedDateTime": "2026-06-15T09:55:02+02:00",
+      "orderItems": [
+        {
+          "orderItemId": "3941177196",
+          "ean": "5419980565310",
+          "fulfilmentMethod": "FBR",
+          "fulfilmentStatus": "HANDLED",
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "cancellationRequest": false,
+          "latestChangedDateTime": "2026-06-15T10:33:44+02:00"
+        }
+      ]
+    }
+  ],
+  "shipments": [
+    {
+      "shipmentId": "e8d3d10a-96af-4bbf-bf72-9a50c3d34f9d",
+      "shipmentDateTime": "2026-06-15T10:33:29+02:00",
+      "shipmentReference": "M0jeL8N",
+      "order": {
+        "orderId": "C0006KNTLL",
+        "orderPlacedDateTime": "2026-06-15T09:55:02+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3941177196",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1556291406"
+      }
+    },
+    {
+      "shipmentId": "ddecc99f-f38d-449e-8080-eb5f1e9cd3a6",
+      "shipmentDateTime": "2026-06-13T00:02:01+02:00",
+      "shipmentReference": "vaA6x2q",
+      "order": {
+        "orderId": "C0006M2KMW",
+        "orderPlacedDateTime": "2026-06-12T12:45:54+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3939762289",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1555537900"
+      }
+    },
+    {
+      "shipmentId": "1d3d4e72-cb02-4394-aee8-0c876d6ca878",
+      "shipmentDateTime": "2026-06-13T00:01:55+02:00",
+      "shipmentReference": "Dj036ZE",
+      "order": {
+        "orderId": "C0006LT1MK",
+        "orderPlacedDateTime": "2026-06-12T12:51:39+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3939765226",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1555537893"
+      }
+    },
+    {
+      "shipmentId": "901c073b-fd20-45b3-a5c8-c896c90becbb",
+      "shipmentDateTime": "2026-06-13T00:01:48+02:00",
+      "shipmentReference": "QjmJlrl",
+      "order": {
+        "orderId": "C0006MNPLC",
+        "orderPlacedDateTime": "2026-06-12T22:02:36+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3940050629",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1555537846"
+      }
+    },
+    {
+      "shipmentId": "1028d27a-481f-4974-bd9d-52ecc52806a0",
+      "shipmentDateTime": "2026-06-11T11:19:48+02:00",
+      "shipmentReference": "q8Ld7gJ",
+      "order": {
+        "orderId": "C0006JPPNC",
+        "orderPlacedDateTime": "2026-06-10T17:41:23+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3938790389",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1554682396"
+      }
+    },
+    {
+      "shipmentId": "340df692-7021-4c02-9271-a2eb289ab2dd",
+      "shipmentDateTime": "2026-06-09T09:25:36+02:00",
+      "shipmentReference": "wVm477j",
+      "order": {
+        "orderId": "C0006FJJ6F",
+        "orderPlacedDateTime": "2026-06-09T07:21:47+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3937833619",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1553449154"
+      }
+    },
+    {
+      "shipmentId": "44845dd9-4c4b-46d4-b6bc-3787f97990c4",
+      "shipmentDateTime": "2026-06-05T19:29:30+02:00",
+      "shipmentReference": "JXdglDo",
+      "order": {
+        "orderId": "C00068D75M",
+        "orderPlacedDateTime": "2026-06-05T17:00:20+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3935977148",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1551864532"
+      }
+    },
+    {
+      "shipmentId": "7f7e3740-05af-4774-a13d-d7a0406b2b67",
+      "shipmentDateTime": "2026-06-05T01:14:59+02:00",
+      "shipmentReference": "GjgGyD1",
+      "order": {
+        "orderId": "C00065M7KH",
+        "orderPlacedDateTime": "2026-06-03T15:08:13+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3934779845",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1551497173"
+      }
+    },
+    {
+      "shipmentId": "a8878624-819e-4ab2-be61-7af899b11f94",
+      "shipmentDateTime": "2026-06-01T11:53:06+02:00",
+      "shipmentReference": "QjD3n1D",
+      "order": {
+        "orderId": "C00060XP56",
+        "orderPlacedDateTime": "2026-05-30T22:39:11+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3932611950",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1549158706"
+      }
+    },
+    {
+      "shipmentId": "507897e6-d340-4a08-a16d-5c63fad1f761",
+      "shipmentDateTime": "2026-05-19T14:00:02+02:00",
+      "shipmentReference": "yZxdQvJ",
+      "order": {
+        "orderId": "C0005947CJ",
+        "orderPlacedDateTime": "2026-05-19T13:29:12+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3925347068",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1542178832"
+      }
+    },
+    {
+      "shipmentId": "44a3e7ce-4195-4366-b628-021323b1484c",
+      "shipmentDateTime": "2026-05-16T13:21:22+02:00",
+      "shipmentReference": "eGk9BAW",
+      "order": {
+        "orderId": "C0004T948N",
+        "orderPlacedDateTime": "2026-05-16T01:53:34+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3923675013",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1540723260"
+      }
+    },
+    {
+      "shipmentId": "ad0a49a5-9846-413b-a46b-8b752ca363e8",
+      "shipmentDateTime": "2026-05-10T09:10:30+02:00",
+      "shipmentReference": "0rVbV9Q",
+      "order": {
+        "orderId": "C000392WD5",
+        "orderPlacedDateTime": "2026-05-08T21:54:11+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3920195121",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1537806826"
+      }
+    },
+    {
+      "shipmentId": "fa48553c-c902-463f-bae1-8c4222a01ca4",
+      "shipmentDateTime": "2026-04-23T09:51:28+02:00",
+      "shipmentReference": "eGEN3mp",
+      "order": {
+        "orderId": "C000417TRR",
+        "orderPlacedDateTime": "2026-04-22T15:07:00+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3911368715",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1529912750"
+      }
+    },
+    {
+      "shipmentId": "7b0d749c-487f-469c-b8b5-895bf79c3016",
+      "shipmentDateTime": "2026-04-17T17:21:04+02:00",
+      "shipmentReference": "1WooM2w",
+      "order": {
+        "orderId": "C0003NMD8M",
+        "orderPlacedDateTime": "2026-04-16T16:03:45+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3908451020",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1527389052"
+      }
+    },
+    {
+      "shipmentId": "28a8419b-2a88-4e63-98ad-7f284cc4fcbe",
+      "shipmentDateTime": "2026-04-09T23:47:31+02:00",
+      "shipmentReference": "Go28Zym",
+      "order": {
+        "orderId": "C0003D4LX1",
+        "orderPlacedDateTime": "2026-04-09T21:06:43+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3905124595",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1523873882"
+      }
+    },
+    {
+      "shipmentId": "f1a88bbb-c57c-4eee-8b9a-62477ff17f24",
+      "shipmentDateTime": "2026-04-09T19:00:20+02:00",
+      "shipmentReference": "x3rdBzN",
+      "order": {
+        "orderId": "C00032C70H",
+        "orderPlacedDateTime": "2026-04-09T18:22:51+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3905036978",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1523762075"
+      }
+    },
+    {
+      "shipmentId": "aca82f87-52db-4f8b-ba46-32a9686eed92",
+      "shipmentDateTime": "2026-04-04T23:09:55+02:00",
+      "shipmentReference": "aZzDv2j",
+      "order": {
+        "orderId": "C00035MX7D",
+        "orderPlacedDateTime": "2026-04-04T18:47:45+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3902688061",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1521502191"
+      }
+    },
+    {
+      "shipmentId": "6d8f0b81-68d0-4099-8743-176cf939f48f",
+      "shipmentDateTime": "2026-04-04T23:09:46+02:00",
+      "shipmentReference": "zyAqKp3",
+      "order": {
+        "orderId": "C00035LP9N",
+        "orderPlacedDateTime": "2026-04-04T17:48:55+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3902667287",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1521502193"
+      }
+    },
+    {
+      "shipmentId": "8ddfaa9c-70d3-407d-b0c2-96ad620fa70c",
+      "shipmentDateTime": "2026-04-03T08:57:33+02:00",
+      "shipmentReference": "qDWrObz",
+      "order": {
+        "orderId": "C00033TL8N",
+        "orderPlacedDateTime": "2026-04-02T21:16:11+02:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3901894371",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1520968709"
+      }
+    },
+    {
+      "shipmentId": "668bc9c1-532d-495c-ae5e-6390f18ac122",
+      "shipmentDateTime": "2026-03-28T11:22:32+01:00",
+      "shipmentReference": "ANJGbJQ",
+      "order": {
+        "orderId": "C0002R8CM3",
+        "orderPlacedDateTime": "2026-03-27T19:12:46+01:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3898531288",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1517978912"
+      }
+    },
+    {
+      "shipmentId": "fbb54e85-0963-4d9c-a7bb-76d4a5b4dde0",
+      "shipmentDateTime": "2026-03-24T10:32:06+01:00",
+      "shipmentReference": "x3md1yv",
+      "order": {
+        "orderId": "C0002K06TH",
+        "orderPlacedDateTime": "2026-03-24T10:05:29+01:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3896085034",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1515569577"
+      }
+    },
+    {
+      "shipmentId": "5750000f-580f-4ebb-8041-d7a66ee66d7a",
+      "shipmentDateTime": "2026-03-21T18:51:03+01:00",
+      "shipmentReference": "eGJdn2j",
+      "order": {
+        "orderId": "C0002DPFMJ",
+        "orderPlacedDateTime": "2026-03-21T17:41:36+01:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3894629088",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1514211384"
+      }
+    },
+    {
+      "shipmentId": "11dfbd27-bfa7-458d-a8fb-0b7c231d5eae",
+      "shipmentDateTime": "2026-03-21T18:50:54+01:00",
+      "shipmentReference": "dK6No1w",
+      "order": {
+        "orderId": "C0002D4DMK",
+        "orderPlacedDateTime": "2026-03-20T23:15:45+01:00"
+      },
+      "shipmentItems": [
+        {
+          "orderItemId": "3894357840",
+          "ean": "5419980565310"
+        }
+      ],
+      "transport": {
+        "transportId": "1514211375"
+      }
+    }
+  ],
+  "order_details": [
+    {
+      "orderId": "C0006KNTLL",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-15T09:55:02+02:00",
+      "shipmentDetails": {
+        "salutation": "MALE",
+        "firstName": "Orhan",
+        "surname": "Özcelik",
+        "streetName": "Kalsdonksestraat",
+        "houseNumber": "59",
+        "zipCode": "4702ZB",
+        "city": "ROOSENDAAL",
+        "countryCode": "NL",
+        "email": "2esvlyjk6owmk2ntgoa5m65pumpg2e@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "MALE",
+        "firstName": "Orhan",
+        "surname": "Ozcelik",
+        "streetName": "Kalsdonksestraat",
+        "houseNumber": "153",
+        "houseNumberExtension": "C",
+        "zipCode": "4702ZD",
+        "city": "Roosendaal",
+        "countryCode": "NL",
+        "email": "2esvlyjk6owmk2ntgoa5m65pumpg2e@verkopen.bol.com",
+        "orderReference": "C0006KNTLL"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3941177196",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-18",
+            "expiryDate": "2026-06-21",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-15T10:33:44+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0006M2KMW",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-12T12:45:54+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Federica",
+        "surname": "Tromp -Mathilda",
+        "streetName": "Mimosastraat",
+        "houseNumber": "24",
+        "zipCode": "6002TK",
+        "city": "WEERT",
+        "countryCode": "NL",
+        "email": "2zljpwkiaebq2ohfpxkquhjxorhtiw@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Federica",
+        "surname": "Tromp -Mathilda",
+        "streetName": "Mimosastraat",
+        "houseNumber": "24",
+        "zipCode": "6002TK",
+        "city": "WEERT",
+        "countryCode": "NL",
+        "email": "2zljpwkiaebq2ohfpxkquhjxorhtiw@verkopen.bol.com",
+        "orderReference": "C0006M2KMW"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3939762289",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-17",
+            "expiryDate": "2026-06-20",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-13T00:02:22+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0006LT1MK",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-12T12:51:39+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Christiane",
+        "surname": "Wijnants",
+        "streetName": "Liersesteenweg",
+        "houseNumber": "93",
+        "zipCode": "2860",
+        "city": "Sint-Katelijne-Waver",
+        "countryCode": "BE",
+        "email": "275aa5w2smkx6zvdgpahw42zssac54@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Christiane",
+        "surname": "Wijnants",
+        "streetName": "Liersesteenweg",
+        "houseNumber": "93",
+        "zipCode": "2860",
+        "city": "Sint-Katelijne-Waver",
+        "countryCode": "BE",
+        "email": "275aa5w2smkx6zvdgpahw42zssac54@verkopen.bol.com",
+        "orderReference": "C0006LT1MK"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3939765226",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-17",
+            "expiryDate": "2026-06-20",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-13T00:02:21+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0006MNPLC",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-12T22:02:36+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Meta",
+        "surname": "von Hout",
+        "streetName": "Wiekslag",
+        "houseNumber": "3",
+        "zipCode": "4241XV",
+        "city": "ARKEL",
+        "countryCode": "NL",
+        "email": "2xcewyob4nqkx6xtzia45ncibe3zno@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Meta",
+        "surname": "von Hout",
+        "streetName": "Wiekslag",
+        "houseNumber": "3",
+        "zipCode": "4241XV",
+        "city": "ARKEL",
+        "countryCode": "NL",
+        "email": "2xcewyob4nqkx6xtzia45ncibe3zno@verkopen.bol.com",
+        "orderReference": "C0006MNPLC"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3940050629",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-17",
+            "expiryDate": "2026-06-20",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 2,
+          "quantityShipped": 2,
+          "quantityCancelled": 0,
+          "unitPrice": 24.99,
+          "totalPrice": 49.98,
+          "discounts": [],
+          "commission": 7.9,
+          "latestChangedDateTime": "2026-06-13T00:02:19+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0006JPPNC",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-10T17:41:23+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Jeanette",
+        "surname": "Vaartjes",
+        "streetName": "Visserwei",
+        "houseNumber": "48",
+        "zipCode": "8407EZ",
+        "city": "TERWISPEL",
+        "countryCode": "NL",
+        "email": "2yzaztqoniuak73wujffzitsaaxjps@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Jeanette",
+        "surname": "Vaartjes",
+        "streetName": "Visserwei",
+        "houseNumber": "48",
+        "zipCode": "8407EZ",
+        "city": "TERWISPEL",
+        "countryCode": "NL",
+        "email": "2yzaztqoniuak73wujffzitsaaxjps@verkopen.bol.com",
+        "orderReference": "C0006JPPNC"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3938790389",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-15",
+            "expiryDate": "2026-06-18",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-11T11:20:04+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0006FJJ6F",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-09T07:21:47+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Saskia",
+        "surname": "Windig",
+        "streetName": "Dorpsdijk",
+        "houseNumber": "18",
+        "zipCode": "3161KE",
+        "city": "RHOON",
+        "countryCode": "NL",
+        "email": "2wdd37v7l4xl5vqhrhftd3dws3al6m@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Saskia",
+        "surname": "Windig",
+        "streetName": "Dorpsdijk",
+        "houseNumber": "18",
+        "zipCode": "3161KE",
+        "city": "RHOON",
+        "countryCode": "NL",
+        "email": "2wdd37v7l4xl5vqhrhftd3dws3al6m@verkopen.bol.com",
+        "orderReference": "C0006FJJ6F"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3937833619",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-12",
+            "expiryDate": "2026-06-15",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-09T09:26:15+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00068D75M",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-05T17:00:20+02:00",
+      "shipmentDetails": {
+        "salutation": "UNKNOWN",
+        "firstName": "Joke",
+        "surname": "Giesen",
+        "streetName": "Lokhorst",
+        "houseNumber": "51",
+        "zipCode": "2352KE",
+        "city": "Leiderdorp",
+        "countryCode": "NL",
+        "email": "2vfmtzja6xwxr6qtjtimrfil56qkec@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Esther",
+        "surname": "Giesen",
+        "streetName": "Meloenpad",
+        "houseNumber": "15",
+        "zipCode": "2292BJ",
+        "city": "WATERINGEN",
+        "countryCode": "NL",
+        "email": "2vfmtzja6xwxr6qtjtimrfil56qkec@verkopen.bol.com",
+        "orderReference": "C00068D75M"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3935977148",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-10",
+            "expiryDate": "2026-06-13",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-05T19:29:49+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00065M7KH",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-06-03T15:08:13+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Margo",
+        "surname": "Kadiyeva",
+        "streetName": "Hert. van Brabantstraat",
+        "houseNumber": "8",
+        "zipCode": "5552KV",
+        "city": "VALKENSWAARD",
+        "countryCode": "NL",
+        "email": "2wgkxqvfxa5634p7ss5ibrjl2rhvys@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Margo",
+        "surname": "Kadiyeva",
+        "streetName": "Hert. van Brabantstraat",
+        "houseNumber": "8",
+        "zipCode": "5552KV",
+        "city": "VALKENSWAARD",
+        "countryCode": "NL",
+        "email": "2wgkxqvfxa5634p7ss5ibrjl2rhvys@verkopen.bol.com",
+        "orderReference": "C00065M7KH"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3934779845",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-08",
+            "expiryDate": "2026-06-11",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-05T01:15:18+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00060XP56",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-05-30T22:39:11+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Nathalie",
+        "surname": "Mensinga",
+        "streetName": "Tamarstraat",
+        "houseNumber": "5",
+        "zipCode": "3207AM",
+        "city": "SPIJKENISSE",
+        "countryCode": "NL",
+        "email": "2lnpcgxwbbyeta4o6okviqrx7wbr2a@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Nathalie",
+        "surname": "Mensinga",
+        "streetName": "Tamarstraat",
+        "houseNumber": "5",
+        "zipCode": "3207AM",
+        "city": "SPIJKENISSE",
+        "countryCode": "NL",
+        "email": "2lnpcgxwbbyeta4o6okviqrx7wbr2a@verkopen.bol.com",
+        "orderReference": "C00060XP56"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3932611950",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-06-04",
+            "expiryDate": "2026-06-07",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-06-01T11:53:39+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0005947CJ",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-05-19T13:29:12+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "m",
+        "surname": "blankevoort",
+        "streetName": "Johannes Jelgerhuishof",
+        "houseNumber": "25",
+        "zipCode": "1065TN",
+        "city": "AMSTERDAM",
+        "countryCode": "NL",
+        "email": "23i2sb4b2gvr4hjnzv22mrojhpjcty@verkopen.bol.com",
+        "language": "nl"
+      },
+      "billingDetails": {
+        "salutation": "FEMALE",
+        "firstName": "m",
+        "surname": "blankevoort",
+        "streetName": "Johannes Jelgerhuishof",
+        "houseNumber": "25",
+        "zipCode": "1065TN",
+        "city": "AMSTERDAM",
+        "countryCode": "NL",
+        "email": "23i2sb4b2gvr4hjnzv22mrojhpjcty@verkopen.bol.com",
+        "orderReference": "C0005947CJ"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3925347068",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-05-22",
+            "expiryDate": "2026-05-25",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-05-19T14:00:08+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0004T948N",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-05-16T01:53:34+02:00",
+      "shipmentDetails": {
+        "salutation": "UNKNOWN",
+        "firstName": "Nadiia",
+        "surname": "Sliusar",
+        "streetName": "Venrayseweg",
+        "houseNumber": "109",
+        "zipCode": "5928RG",
+        "city": "Venlo",
+        "countryCode": "NL",
+        "email": "2ixmhepgatse2wb5cqu76wmc5yi7sa@verkopen.bol.com",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3923675013",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-05-21",
+            "expiryDate": "2026-05-24",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-05-16T13:21:47+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C000392WD5",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-05-08T21:54:11+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Karin",
+        "surname": "Ruijzing",
+        "streetName": "Daan Schammerstraat",
+        "houseNumber": "24",
+        "zipCode": "3084MB",
+        "city": "ROTTERDAM",
+        "countryCode": "NL",
+        "email": "2k2chw7xqsj53xxtbbl47vymrykr2g@verkopen.bol.com",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3920195121",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-05-13",
+            "expiryDate": "2026-05-16",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-05-10T09:10:36+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C000417TRR",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-22T15:07:00+02:00",
+      "shipmentDetails": {
+        "salutation": "MALE",
+        "firstName": "eric",
+        "surname": "v hulsel",
+        "streetName": "Oranjeboomstraat",
+        "houseNumber": "148",
+        "zipCode": "4812EL",
+        "city": "BREDA",
+        "countryCode": "NL",
+        "email": "2ydy7v7jjd3ragke6y6k6j4hpqjcsw@verkopen.bol.com",
+        "company": "---",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3911368715",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-28",
+            "expiryDate": "2026-05-01",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-23T09:52:25+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0003NMD8M",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-16T16:03:45+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Inez",
+        "surname": "Visser-Vink",
+        "streetName": "Peppinghof",
+        "houseNumber": "9",
+        "zipCode": "1391BA",
+        "city": "ABCOUDE",
+        "countryCode": "NL",
+        "email": "2togo7h6mqmfgytqsdnganzkwteti2@verkopen.bol.com",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3908451020",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-21",
+            "expiryDate": "2026-04-24",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-17T17:21:29+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0003D4LX1",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-09T21:06:43+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Zahra",
+        "surname": "Hosseini",
+        "streetName": "Burgemeester Liesestraat",
+        "houseNumber": "5",
+        "zipCode": "9648BS",
+        "city": "Wildervank",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3905124595",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-14",
+            "expiryDate": "2026-04-17",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-09T23:47:39+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00032C70H",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-09T18:22:51+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Petra",
+        "surname": "Wassenaar",
+        "streetName": "Julianastraat",
+        "houseNumber": "62",
+        "houseNumberExtension": "A",
+        "zipCode": "2161RE",
+        "city": "LISSE",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3905036978",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-14",
+            "expiryDate": "2026-04-17",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-09T19:01:10+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00035MX7D",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-04T18:47:45+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Busra",
+        "surname": "Ulusoy",
+        "streetName": "Royaardsplein",
+        "houseNumber": "150",
+        "zipCode": "3123AS",
+        "city": "Schiedam",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3902688061",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-10",
+            "expiryDate": "2026-04-13",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-04T23:10:07+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00035LP9N",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-04T17:48:55+02:00",
+      "shipmentDetails": {
+        "salutation": "MALE",
+        "firstName": "Jan",
+        "surname": "Oosterling",
+        "streetName": "Koning Davidstraat",
+        "houseNumber": "25",
+        "zipCode": "1502NV",
+        "city": "ZAANDAM",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3902667287",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-10",
+            "expiryDate": "2026-04-13",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-04T23:10:07+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C00033TL8N",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-04-02T21:16:11+02:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "Gelas",
+        "surname": "Hassan",
+        "streetName": "Vuurvlinderstraat",
+        "houseNumber": "86",
+        "zipCode": "5641DN",
+        "city": "Eindhoven",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3901894371",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-08",
+            "expiryDate": "2026-04-11",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-04-03T08:58:05+02:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0002R8CM3",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-03-27T19:12:46+01:00",
+      "shipmentDetails": {
+        "salutation": "MALE",
+        "firstName": "Flip",
+        "surname": "de Zwart",
+        "streetName": "Montaubanstraat",
+        "houseNumber": "82",
+        "zipCode": "3701HX",
+        "city": "ZEIST",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3898531288",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-04-01",
+            "expiryDate": "2026-04-04",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-03-28T11:22:36+01:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0002K06TH",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-03-24T10:05:29+01:00",
+      "shipmentDetails": {
+        "salutation": "UNKNOWN",
+        "firstName": "Isabelle",
+        "surname": "Coppens",
+        "streetName": "Monumentstraat",
+        "houseNumber": "7",
+        "zipCode": "9940",
+        "city": "Ertvelde",
+        "countryCode": "BE",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3896085034",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-03-27",
+            "expiryDate": "2026-03-30",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-03-24T10:32:15+01:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0002DPFMJ",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-03-21T17:41:36+01:00",
+      "shipmentDetails": {
+        "salutation": "FEMALE",
+        "firstName": "annet",
+        "surname": "sandee",
+        "streetName": "Weerhaan",
+        "houseNumber": "18",
+        "zipCode": "4336KS",
+        "city": "MIDDELBURG",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3894629088",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-03-26",
+            "expiryDate": "2026-03-29",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 2,
+          "quantityShipped": 2,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 55.98,
+          "discounts": [],
+          "commission": 8.64,
+          "latestChangedDateTime": "2026-03-21T18:51:22+01:00"
+        }
+      ]
+    },
+    {
+      "orderId": "C0002D4DMK",
+      "pickupPoint": false,
+      "orderPlacedDateTime": "2026-03-20T23:15:45+01:00",
+      "shipmentDetails": {
+        "salutation": "MALE",
+        "firstName": "Robel",
+        "surname": "Weldemariam",
+        "streetName": "De Lemzijde",
+        "houseNumber": "165",
+        "zipCode": "7823SM",
+        "city": "Emmen",
+        "countryCode": "NL",
+        "language": "nl"
+      },
+      "orderItems": [
+        {
+          "orderItemId": "3894357840",
+          "cancellationRequest": false,
+          "fulfilment": {
+            "method": "FBR",
+            "distributionParty": "RETAILER",
+            "latestDeliveryDate": "2026-03-25",
+            "expiryDate": "2026-03-28",
+            "timeFrameType": "REGULAR"
+          },
+          "offer": {
+            "offerId": "d7182bcb-e356-44c5-ba42-655d0cf0c71c"
+          },
+          "product": {
+            "ean": "5419980565310",
+            "title": "CleanWin - Dweil Vloerwisser Mop – PVA Spons Mop met Zelfuitwringend Systeem, Verstelbare RVS Steel en 2 Absorberende Navullingen – Ideaal voor Tegels, Badkamer en Garage (33 cm)"
+          },
+          "quantity": 1,
+          "quantityShipped": 1,
+          "quantityCancelled": 0,
+          "unitPrice": 27.99,
+          "totalPrice": 27.99,
+          "discounts": [],
+          "commission": 4.32,
+          "latestChangedDateTime": "2026-03-21T18:51:21+01:00"
+        }
+      ]
+    }
+  ],
+  "settlements": [],
+  "transactions": [],
+  "finance_tx": [],
+  "returns": [
+    {
+      "returnId": "104071456",
+      "registrationDateTime": "2026-02-11T11:21:39+01:00",
+      "fulfilmentMethod": "FBR",
+      "returnItems": [
+        {
+          "rmaId": "141604949",
+          "orderId": "C0000DT09T",
+          "ean": "5419980565310",
+          "expectedQuantity": 1,
+          "returnReason": {
+            "mainReason": "Anders",
+            "detailedReason": "Anders, namelijk",
+            "customerComments": "A  pakket fors beschadigd B  na openen inhoud beschadigd en missende navullingen."
+          },
+          "handled": true,
+          "processingResults": [
+            {
+              "quantity": 1,
+              "processingResult": "CANCELLED",
+              "handlingResult": "CANCELLED_BY_CUSTOMER",
+              "processingDateTime": "2026-02-19T08:07:05+01:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "returnId": "103424195",
+      "registrationDateTime": "2026-01-21T14:12:24+01:00",
+      "fulfilmentMethod": "FBR",
+      "returnItems": [
+        {
+          "rmaId": "140911191",
+          "orderId": "A000CADFCD",
+          "ean": "5419980565310",
+          "expectedQuantity": 1,
+          "returnReason": {
+            "mainReason": "Verkeerd besteld",
+            "detailedReason": "Anders, namelijk",
+            "customerComments": "dacht dat dit de magic vloer wisser was heb dithersteld"
+          },
+          "handled": true,
+          "processingResults": [
+            {
+              "quantity": 1,
+              "processingResult": "ACCEPTED",
+              "handlingResult": "RETURN_RECEIVED",
+              "processingDateTime": "2026-02-02T14:25:19+01:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "returnId": "101963493",
+      "registrationDateTime": "2025-12-12T11:06:01+01:00",
+      "fulfilmentMethod": "FBR",
+      "returnItems": [
+        {
+          "rmaId": "139350951",
+          "orderId": "A000CN8PUU",
+          "ean": "5419980565310",
+          "expectedQuantity": 1,
+          "returnReason": {
+            "mainReason": "Anders",
+            "detailedReason": "Artikel had ik toch niet nodig"
+          },
+          "handled": true,
+          "processingResults": [
+            {
+              "quantity": 1,
+              "processingResult": "ACCEPTED",
+              "handlingResult": "RETURN_RECEIVED",
+              "processingDateTime": "2025-12-13T14:14:56+01:00"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inventory": [],
+  "offers": []
+}
