@@ -69,7 +69,7 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
       <h1>Дашборд продаж</h1>
     </div>
   </div>
-  <div class="header-meta">Обновлено: <span id="upd-time">—</span><br>Источник: CSV-выгрузки + API bol.com + PDF-инвойсы</div>
+  <div class="header-meta">Обновлено: <span id="upd-time">—</span><br>Источник: SP-API Amazon + API bol.com + PDF-инвойсы</div>
 </div>
 <div class="controls">
   <span class="period-label">Период:</span>
@@ -129,7 +129,7 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
       </div>
     </div>
   </div>
-  <div class="kpi-row" style="margin-bottom:20px;">
+  <div class="kpi-row" style="margin-bottom:14px;">
     <div class="kpi" style="border-left:3px solid #0000a4;">
       <div class="kpi-lbl" style="color:#0000a4;">🏦 Комиссии bol.com <span class="card-tag" style="background:#dcfce7;color:#166534;">● PDF · реальные</span></div>
       <div class="kpi-val" style="font-size:22px;" id="v-bol-comm">—</div>
@@ -148,6 +148,28 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
     <div class="kpi" style="border-left:3px solid #7c3aed;">
       <div class="kpi-lbl" style="color:#7c3aed;">💎 Итого чистыми BOL <span class="card-tag" style="background:#ede9fe;color:#5b21b6;">после рекламы</span></div>
       <div class="kpi-val" style="font-size:22px;" id="v-bol-final">—</div>
+      <div class="kpi-split"><span>нетто − реклама</span></div>
+    </div>
+  </div>
+  <div class="kpi-row" style="margin-bottom:20px;">
+    <div class="kpi" style="border-left:3px solid #FF9900;">
+      <div class="kpi-lbl" style="color:#b36900;">🏦 Комиссии Amazon <span class="card-tag" style="background:#fff7ed;color:#c2410c;">● Finance API</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-amz-comm">—</div>
+      <div class="kpi-split"><span>ставка: <b id="v-amz-comm-pct">—</b></span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #10b981;">
+      <div class="kpi-lbl" style="color:#10b981;">💰 Нетто Amazon <span class="card-tag" style="background:#dcfce7;color:#166534;">после комиссии</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-amz-net">—</div>
+      <div class="kpi-split"><span>gross − комиссия Amazon</span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #ef4444;">
+      <div class="kpi-lbl" style="color:#dc2626;">📢 Реклама Amazon <span class="card-tag" style="background:#fee2e2;color:#991b1b;">Sponsored Products</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-amz-adv">—</div>
+      <div class="kpi-split"><span>из Finance API</span></div>
+    </div>
+    <div class="kpi" style="border-left:3px solid #7c3aed;">
+      <div class="kpi-lbl" style="color:#7c3aed;">💎 Итого чистыми AMZ <span class="card-tag" style="background:#ede9fe;color:#5b21b6;">после рекламы</span></div>
+      <div class="kpi-val" style="font-size:22px;" id="v-amz-final">—</div>
       <div class="kpi-split"><span>нетто − реклама</span></div>
     </div>
   </div>
@@ -216,8 +238,9 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
     <div class="card-title">Детализация по месяцам</div>
     <table>
       <thead><tr>
-        <th>Месяц</th><th>Amazon выручка</th><th>BOL выручка</th><th>Итого выручка</th>
-        <th>Amazon заказы</th><th>BOL заказы</th><th>Итого заказы</th><th>Средний чек</th><th>Тренд</th>
+        <th>Месяц</th><th>Amazon выручка</th><th>AMZ комиссия</th><th>AMZ нетто</th>
+        <th>BOL выручка</th><th>Итого выручка</th>
+        <th>AMZ заказы</th><th>BOL заказы</th><th>Средний чек</th><th>Тренд</th>
       </tr></thead>
       <tbody id="monthly-tbody"></tbody>
     </table>
@@ -231,7 +254,9 @@ const BOL_ORD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 const BOL_VIS=[0,8,5,8,4,5,3,3,2,5,1,3,3,5,6,1,2,11,2,5,3,2,6,1,5,7,13,17,112,105,73,89,91,82,92,113,92,98,88,91,47,12,16,20,11,9,10,10,13,4,15,5,4,5,8,5,11,11,6,4,11,12,11,9,14,5,12,5,9,7,7,9,2,6,5,4,5,3,8,3,10,7,8,7,10,3,7,6,3,6,3,3,6,7,6,3,4,5,6,3,4,6,5,5,0,3,10,6,3,1,3,2,8,5,5,2,5,4,5,2,5,1,4,3,6,5,5,7,1,5,2,3,3,5,3,8,2,2,1,4,5,8,5,5,6,5,0,5,2,1,4,6,5,9,1,6,4,8,4,6,4,3,2,9,1,8,10,4,6,19,4,6,4,3,4,3,4,6,3,3,5,5,7,11,7,4,2,9,2,1,4,8,7,5,4,5,3,5,5,4,3,3,1,4,3,3,1,3,6,4,6,5,4,2,10,10,8,5,6,7,5,4,8,4,4,0];
 const AMZ_REV=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,39.98,0.0,19.99,0.0,39.98,79.96,19.99,59.97,0.0,19.99,19.99,19.99,19.99,0.0,0.0,19.99,19.99,0.0,0.0,0.0,0.0,19.99,0.0,19.99,0.0,0.0,0.0,0.0,0.0,0.0,39.98,0.0,19.99,0.0,39.98,19.99,19.99,0.0,0.0,39.98,19.99,39.98,39.98,19.99,0.0,0.0,0.0,0.0,19.99,0.0,0.0,0.0,39.98,0.0,0.0,0.0,0.0,19.99,0.0,19.99,0.0,39.98,19.99,0.0,19.99,19.99,0.0,0.0,0.0,0.0,39.98,0.0,0.0,0.0,0.0,0.0,0.0,19.99,19.99,0.0,19.99,19.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,19.99,0.0,0.0,19.99,0.0,0.0,0.0,19.99,0.0,0.0,0.0,0.0,0.0,19.99,22.99,0.0,0.0,22.99,46.78,0.0,51.98,0.0,0.0,0.0,0.0,25.99,25.99,0.0,0.0,0.0,25.99,0.0,51.98,25.99,0.0,51.98,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,25.99,0.0,0.0,0.0,25.99,0.0,25.99,0.0,0.0,26.99,0.0,0.0,26.99,26.99,0.0,26.99,0.0,0.0,0.0,0.0,0.0,26.99,26.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,26.99,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0,0.0,27.99,0.0,0.0,0.0,0.0];
 const AMZ_ORD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,2,4,1,3,0,1,1,1,1,0,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,2,0,1,0,2,1,1,0,0,2,1,1,2,1,0,0,0,0,1,0,0,0,2,0,0,0,0,1,0,1,0,1,1,0,1,1,0,0,0,0,2,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,1,0,2,0,0,0,0,1,1,0,0,0,1,0,2,1,0,2,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0,1,1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0];
-const MONTHLY={"2025-11":{bol_rev:0.0,bol_ord:0,amz_rev:27.99,amz_ord:1},"2025-12":{bol_rev:0.0,bol_ord:0,amz_rev:419.79,amz_ord:21},"2026-01":{bol_rev:0.0,bol_ord:0,amz_rev:379.81,amz_ord:18},"2026-02":{bol_rev:0.0,bol_ord:0,amz_rev:239.88,amz_ord:11},"2026-03":{bol_rev:139.95,bol_ord:4,amz_rev:224.7,amz_ord:9},"2026-04":{bol_rev:195.93,bol_ord:7,amz_rev:285.89,amz_ord:11},"2026-05":{bol_rev:83.97,bol_ord:3,amz_rev:161.94,amz_ord:6},"2026-06":{bol_rev:273.9,bol_ord:9,amz_rev:82.97,amz_ord:3}};
+const AMZ_FEES=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+const AMZ_ADS=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+const MONTHLY={"2025-11":{bol_rev:0.0,bol_ord:0,amz_rev:27.99,amz_ord:1,amz_fees:0.0,amz_ads:0.0},"2025-12":{bol_rev:0.0,bol_ord:0,amz_rev:419.79,amz_ord:21,amz_fees:0.0,amz_ads:0.0},"2026-01":{bol_rev:0.0,bol_ord:0,amz_rev:379.81,amz_ord:18,amz_fees:0.0,amz_ads:0.0},"2026-02":{bol_rev:0.0,bol_ord:0,amz_rev:239.88,amz_ord:11,amz_fees:0.0,amz_ads:0.0},"2026-03":{bol_rev:139.95,bol_ord:4,amz_rev:224.7,amz_ord:9,amz_fees:0.0,amz_ads:0.0},"2026-04":{bol_rev:195.93,bol_ord:7,amz_rev:285.89,amz_ord:11,amz_fees:0.0,amz_ads:0.0},"2026-05":{bol_rev:83.97,bol_ord:3,amz_rev:161.94,amz_ord:6,amz_fees:0.0,amz_ads:0.0},"2026-06":{bol_rev:273.9,bol_ord:9,amz_rev:82.97,amz_ord:3,amz_fees:0.0,amz_ads:0.0}};
 const MONTH_LABELS={"2025-11":"ноябрь 25","2025-12":"декабрь 25","2026-01":"январь 26","2026-02":"февраль 26","2026-03":"март 26","2026-04":"апрель 26","2026-05":"май 26","2026-06":"июнь 26"};
 const BOL_SETTLEMENTS=[
   {from:"2025-10-08",to:"2025-10-24",period:"08 okt – 24 okt 2025",rev:27.99,comm:4.32,net:23.67,adv:0.00,final:23.67,orders:1},
@@ -261,7 +286,7 @@ function getSettlementForRange(start,end){
 }
 let curPeriod='month',curMP='all';
 let lineChart,pieChart,barChart,ordChart;
-document.getElementById('upd-time').textContent="17.06.2026 13:20 (авто)";
+document.getElementById('upd-time').textContent="17.06.2026 13:53 (авто)";
 function eur(v){return'€'+parseFloat(v).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
 function setDelta(id,cur,prev){
@@ -294,11 +319,16 @@ function getPrevRange(start,end){
   return{start:ps.toISOString().slice(0,10),end:pe.toISOString().slice(0,10)};
 }
 function sumRange(start,end){
-  let aRev=0,bRev=0,aOrd=0,bOrd=0,bVis=0;
+  let aRev=0,bRev=0,aOrd=0,bOrd=0,bVis=0,aFees=0,aAds=0;
   for(let i=0;i<DATES.length;i++){
-    if(DATES[i]>=start&&DATES[i]<=end){aRev+=AMZ_REV[i]||0;bRev+=BOL_REV[i]||0;aOrd+=AMZ_ORD[i]||0;bOrd+=BOL_ORD[i]||0;bVis+=BOL_VIS[i]||0;}
+    if(DATES[i]>=start&&DATES[i]<=end){
+      aRev+=AMZ_REV[i]||0;bRev+=BOL_REV[i]||0;
+      aOrd+=AMZ_ORD[i]||0;bOrd+=BOL_ORD[i]||0;
+      bVis+=BOL_VIS[i]||0;
+      aFees+=AMZ_FEES[i]||0;aAds+=AMZ_ADS[i]||0;
+    }
   }
-  return{aRev,bRev,aOrd,bOrd,bVis};
+  return{aRev,bRev,aOrd,bOrd,bVis,aFees,aAds};
 }
 function setPeriod(p){
   curPeriod=p;
@@ -347,6 +377,19 @@ function render(){
     setText('v-bol-comm',eur(comm));setText('v-bol-net',eur(cur.bRev-comm));
     setText('v-bol-adv','—');setText('v-bol-final','—');
     setText('v-bol-comm-pct','~15,4%');setText('v-bol-comm-src','оценка');
+  }
+  // Amazon: комиссия и реклама из Finance API
+  const aFees=cur.aFees||0, aAds=cur.aAds||0;
+  const hasAmzFin=aFees>0||aAds>0;
+  if(hasAmzFin){
+    const amzNet=cur.aRev-aFees, amzFinal=amzNet-aAds;
+    const amzPct=cur.aRev>0?(aFees/cur.aRev*100).toFixed(1)+'%':'—';
+    setText('v-amz-comm',eur(aFees));setText('v-amz-comm-pct',amzPct);
+    setText('v-amz-net',eur(amzNet));
+    setText('v-amz-adv',eur(aAds));setText('v-amz-final',eur(amzFinal));
+  }else{
+    setText('v-amz-comm','—');setText('v-amz-comm-pct','нет данных Finance API');
+    setText('v-amz-net','—');setText('v-amz-adv','—');setText('v-amz-final','—');
   }
   setText('chart-period-tag',fmtDateRu(start)+' — '+fmtDateRu(end));
   updateLineChart(start,end);updatePieChart(revA,revB);
@@ -420,12 +463,28 @@ function renderSettlementsTable(){
 function renderMonthlyTable(){
   const months=Object.keys(MONTHLY);let rows='',prevRev=null;
   for(const m of months){
-    const d=MONTHLY[m],totalRev=(d.amz_rev||0)+(d.bol_rev||0),totalOrd=(d.amz_ord||0)+(d.bol_ord||0);
+    const d=MONTHLY[m];
+    const aRev=d.amz_rev||0,bRev=d.bol_rev||0;
+    const aFees=d.amz_fees||0,aAds=d.amz_ads||0;
+    const aNet=aRev-aFees;
+    const totalRev=aRev+bRev,totalOrd=(d.amz_ord||0)+(d.bol_ord||0);
     const avg=totalOrd>0?totalRev/totalOrd:0;
     let trend='';
     if(prevRev!==null){trend=totalRev>prevRev?'<span style="color:#10b981;font-weight:700;">▲</span>':totalRev<prevRev?'<span style="color:#ef4444;font-weight:700;">▼</span>':'<span style="color:#9ca3af;">—</span>';}
     prevRev=totalRev;
-    rows+=`<tr class="month-row"><td><strong>${MONTH_LABELS[m]||m}</strong></td><td>${eur(d.amz_rev||0)}</td><td>${eur(d.bol_rev||0)}</td><td style="font-weight:700;">${eur(totalRev)}</td><td>${d.amz_ord||0}</td><td>${d.bol_ord||0}</td><td style="font-weight:700;">${totalOrd}</td><td>${avg>0?eur(avg):'—'}</td><td style="text-align:center;">${trend}</td></tr>`;
+    const feesCell=aFees>0?`<span style="color:#dc2626;">${eur(aFees)}</span>`:'—';
+    const netCell=aFees>0?eur(aNet):'—';
+    rows+=`<tr class="month-row">
+      <td><strong>${MONTH_LABELS[m]||m}</strong></td>
+      <td>${eur(aRev)}</td>
+      <td style="font-size:11px;">${feesCell}</td>
+      <td style="color:#10b981;">${netCell}</td>
+      <td>${eur(bRev)}</td>
+      <td style="font-weight:700;">${eur(totalRev)}</td>
+      <td>${d.amz_ord||0}</td><td>${d.bol_ord||0}</td>
+      <td>${avg>0?eur(avg):'—'}</td>
+      <td style="text-align:center;">${trend}</td>
+    </tr>`;
   }
   document.getElementById('monthly-tbody').innerHTML=rows;
 }
