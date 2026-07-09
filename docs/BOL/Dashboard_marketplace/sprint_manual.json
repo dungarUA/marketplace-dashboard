@@ -1,0 +1,15 @@
+{
+  "_comment": "Ручной ввод раз в неделю (понедельник). Штук/мес тянется автоматически из marketplace_dashboard.html. Здесь — только то, чего нет в API: отзывы и Kwaliteitsscore.",
+  "target_units": 50,
+  "deadline": "2026-08-31",
+  "baseline_month": "2026-06",
+  "baseline_units": 15,
+  "updated": "2026-07-07",
+  "reviews": {
+    "bol":    { "count": 2,  "avg": 3.5, "goal_count": 7,  "goal_avg": 4.3 },
+    "amazon": { "count": 12, "avg": 4.0, "goal_count": 18, "goal_avg": 4.2 },
+    "site":   { "count": 0,  "avg": null, "goal_count": 0, "goal_avg": null, "note": "Импортированы реальные отзывы Amazon; своих покупателей ещё не было" }
+  },
+  "kwaliteitsscore": { "value": 69, "goal": 70, "updated": "2026-07-01", "note": "Блокер — Delivered on time 84,2% (цель 93%). ≥70 = Select Deals" },
+  "acos": { "note": "25–33%", "goal_be": 27, "goal_nl": 17 }
+}
