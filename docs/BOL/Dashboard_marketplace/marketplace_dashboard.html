@@ -95,9 +95,11 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
 <div class="main">
   <div class="notice">✅ <strong>Комиссии bol.com — реальные данные из 30 PDF-инвойсов</strong> (окт 2025 — июн 2026). Выручка, комиссии и реклама — из официальных счетов bol.com.</div>
 
-  <!-- ═══════════ БЛОК «РОСТ BOL» (обновляется update_growth.py) ═══════════ -->
+  <!-- ═══════════ БЛОК «РОСТ ПРОДАЖ» ═══════════
+       Карточки Bol/Amazon цели — live-данные из MONTHLY (обновляет update_dashboard.py ежедневно).
+       Визиты/CVR/TACoS/кампании/события — из update_growth.py (обновляется вручную). -->
   <div class="card" style="margin-bottom:14px;border-top:3px solid #0000a4;" id="growth-block">
-    <div class="card-title">🚀 Рост Bol — цель 50 → 100 шт/мес
+    <div class="card-title">🚀 Рост продаж — Bol + Amazon (план авг–дек 2026)
       <div style="display:flex;gap:8px;align-items:center;">
         <span class="card-tag" id="g-upd">—</span>
         <span class="card-tag" style="background:#e0e7ff;color:#3730a3;" id="g-phase">—</span>
@@ -105,16 +107,16 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
     </div>
     <div class="kpi-row" style="margin-bottom:14px;">
       <div class="kpi" style="border-color:#0000a4;">
-        <div class="kpi-lbl">🎯 Заказы Bol в этом месяце</div>
-        <div class="kpi-val" id="g-mtd">—</div>
-        <div class="kpi-delta delta-neu" id="g-goal-txt">—</div>
-        <div style="background:#e8ecf0;border-radius:6px;height:8px;overflow:hidden;"><div id="g-bar" style="background:#0000a4;height:8px;width:0%;"></div></div>
+        <div class="kpi-lbl">🎯 Bol — цель месяца</div>
+        <div class="kpi-val" id="g-bol-mtd">—</div>
+        <div class="kpi-delta delta-neu" id="g-bol-goal-txt">—</div>
+        <div style="background:#e8ecf0;border-radius:6px;height:8px;overflow:hidden;"><div id="g-bol-bar" style="background:#0000a4;height:8px;width:0%;"></div></div>
       </div>
-      <div class="kpi" style="border-color:#4f46e5;">
-        <div class="kpi-lbl">📈 Прогноз на конец месяца</div>
-        <div class="kpi-val" id="g-fc">—</div>
-        <div class="kpi-delta" id="g-fc-d">—</div>
-        <div class="kpi-split"><span>по текущему темпу</span></div>
+      <div class="kpi" style="border-color:#FF9900;">
+        <div class="kpi-lbl">🎯 Amazon — цель месяца</div>
+        <div class="kpi-val" id="g-amz-mtd">—</div>
+        <div class="kpi-delta delta-neu" id="g-amz-goal-txt">—</div>
+        <div style="background:#e8ecf0;border-radius:6px;height:8px;overflow:hidden;"><div id="g-amz-bar" style="background:#FF9900;height:8px;width:0%;"></div></div>
       </div>
       <div class="kpi" style="border-color:#f59e0b;">
         <div class="kpi-lbl">👁 Визиты (посл. месяц CSV)</div>
@@ -572,20 +574,7 @@ function renderGrowth(start,end){
   const targetM=inRange.filter(m=>g.monthly[m].visits>0||g.monthly[m].units>0||g.monthly[m].orders>0).pop()
     ||inRange.pop()||g.month;
   const md=g.monthly[targetM];
-  const goal=md?(md.goal||g.goal):g.goal;
   const isCurrentM=targetM===g.month;
-  // Для текущего месяца используем units_mtd (может быть частичным); для прошлых — итог
-  const units=isCurrentM?g.units_mtd:(md?(md.orders||md.units||0):0);
-  const pctGoal=goal>0?Math.round(units/goal*100):0;
-  setText('g-mtd',units+' / '+goal);
-  setText('g-goal-txt',pctGoal+'% цели '+targetM);
-  document.getElementById('g-bar').style.width=Math.min(100,goal>0?units/goal*100:0)+'%';
-  // Прогноз: для текущего месяца — g.forecast; для прошлых — факт = прогнозу
-  const fc=isCurrentM?g.forecast:units;
-  setText('g-fc',fc);
-  const fcEl=document.getElementById('g-fc-d');
-  fcEl.textContent=fc>=goal?'▲ цель достижима':'▼ ниже цели '+goal;
-  fcEl.className='kpi-delta '+(fc>=goal?'delta-pos':'delta-neg');
   // Визиты и CVR
   if(md&&md.visits>0){
     setText('g-vis',md.visits.toLocaleString('ru'));
@@ -599,21 +588,57 @@ function renderGrowth(start,end){
   // TACoS
   setText('g-tacos',md&&md.tacos!=null?pct(md.tacos):'—');
 }
+
+// ── Цели по каналам (Bol / Amazon), план авг–дек 2026 ──────────────────────
+const CHANNEL_GOALS = {
+  '2026-08': {bol:10, amz:10},
+  '2026-09': {bol:15, amz:15},
+  '2026-10': {bol:25, amz:25},
+  '2026-11': {bol:35, amz:35},
+  '2026-12': {bol:50, amz:50}
+};
+
+function renderChannelGoals(){
+  const now = new Date();
+  const ym = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const goals = CHANNEL_GOALS[ym];
+  const md = (typeof MONTHLY!=='undefined' && MONTHLY[ym]) ? MONTHLY[ym] : null;
+  const bolDone = md ? (md.bol_ord||0) : 0;
+  const amzDone = md ? (md.amz_ord||0) : 0;
+  const dom = now.getDate();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+
+  function fillCard(prefix, done, goal){
+    const goalEl = document.getElementById('g-'+prefix+'-goal-txt');
+    const barEl  = document.getElementById('g-'+prefix+'-bar');
+    if(!goal){
+      setText('g-'+prefix+'-mtd', done+' / —');
+      if(goalEl) goalEl.textContent = 'цель на '+ym+' не задана';
+      if(barEl) barEl.style.width = '0%';
+      return;
+    }
+    const fc = dom>0 ? Math.round(done/dom*daysInMonth) : done;
+    const pctDone = Math.round(done/goal*100);
+    setText('g-'+prefix+'-mtd', done+' / '+goal);
+    if(goalEl) goalEl.textContent = pctDone+'% цели · прогноз '+fc;
+    if(barEl) barEl.style.width = Math.min(100, done/goal*100)+'%';
+  }
+
+  fillCard('bol', bolDone, goals ? goals.bol : null);
+  fillCard('amz', amzDone, goals ? goals.amz : null);
+}
+
 /*GROWTH_JSON_START*/const GROWTH=JSON.parse('{"updated": "02.07.2026 10:31", "goal": 30, "goals": {"phase1": 30, "phase2": 50, "phase3": 100}, "month": "2026-07", "units_mtd": 0, "forecast": 0, "breakeven_acos": 0.27, "monthly": {"2025-11": {"units": 6, "visits": 248, "orders": 0, "rev": 0.0, "cvr": 0.0242, "goal": 30, "tacos": null}, "2025-12": {"units": 23, "visits": 1240, "orders": 0, "rev": 0.0, "cvr": 0.0185, "goal": 30, "tacos": null}, "2026-01": {"units": 13, "visits": 217, "orders": 0, "rev": 0.0, "cvr": 0.0599, "goal": 30, "tacos": null}, "2026-02": {"units": 6, "visits": 125, "orders": 0, "rev": 0.0, "cvr": 0.048, "goal": 30, "tacos": null}, "2026-03": {"units": 6, "visits": 119, "orders": 0, "rev": 0.0, "cvr": 0.0504, "goal": 30, "tacos": null}, "2026-04": {"units": 7, "visits": 159, "orders": 7, "rev": 195.93, "cvr": 0.044, "goal": 30, "tacos": 0.0533}, "2026-05": {"units": 4, "visits": 140, "orders": 3, "rev": 83.97, "cvr": 0.0286, "goal": 30, "tacos": 0.3502}, "2026-06": {"units": 8, "visits": 82, "orders": 11, "rev": 329.88, "cvr": 0.0976, "goal": 30, "tacos": 0.0863}, "2026-07": {"units": 0, "visits": 0, "orders": 0, "rev": 0.0, "cvr": null, "goal": 30, "tacos": null}}, "campaigns": [{"name": "AutoMop", "state": "Active", "type": "Automatic", "impressions": 11078.0, "clicks": 516.0, "cpc": 0.38, "conv": 34.0, "rev": 707.06, "spent": 198.04, "acos": 0.2801}, {"name": "Auto Wallonie_17122025", "state": "Active", "type": "Automatic", "impressions": 660.0, "clicks": 43.0, "cpc": 0.3, "conv": 1.0, "rev": 23.13, "spent": 12.72, "acos": 0.5499}, {"name": "Proven Winners_mixed_16122025", "state": "Active", "type": "Manual", "impressions": 85.0, "clicks": 9.0, "cpc": 0.67, "conv": 0.0, "rev": 0.0, "spent": 6.06, "acos": null}, {"name": "Full_Partial match", "state": "Paused", "type": "Manual", "impressions": 3417.0, "clicks": 56.0, "cpc": 1.47, "conv": 2.0, "rev": 39.64, "spent": 82.27, "acos": 2.0754}, {"name": "Full_Exact match", "state": "Paused", "type": "Manual", "impressions": 236.0, "clicks": 6.0, "cpc": 2.23, "conv": 1.0, "rev": 13.21, "spent": 13.37, "acos": 1.0121}], "campaigns_date": "2026-07-01", "deltas": [{"name": "AutoMop", "from": "2026-04-20", "to": "2026-07-01", "spent": 53.65, "rev": 254.43, "conv": 11.0, "clicks": 149.0, "acos": 0.2109}, {"name": "Auto Wallonie_17122025", "from": "2026-04-20", "to": "2026-07-01", "spent": 11.87, "rev": 23.13, "conv": 1.0, "clicks": 41.0, "acos": 0.5132}, {"name": "Proven Winners_mixed_16122025", "from": "2026-04-20", "to": "2026-07-01", "spent": 2.78, "rev": 0.0, "conv": 0.0, "clicks": 3.0, "acos": null}], "events": [{"date": "2026-07-01", "channel": "bol_ads", "type": "ads_change", "title": "AutoMop ACoS 25→33%; MAN_Exact_NL/FR; архив Full_Partial/Full_Exact", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-07-01", "channel": "listing", "type": "listing_change", "title": "Новый заголовок и буллеты NL/FR опубликованы", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-07-01", "channel": "bol_ads", "type": "negatives", "title": "Негатив swiffer в AutoMop + негативы Auto Wallonie", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-06-13", "channel": "organic", "type": "spike", "title": "Всплеск 3 заказа/день — органика (подтверждено дневными данными)", "vis_after": 8, "vis_before": 17, "units_after": 0, "units_before": 5}, {"date": "2026-04-20", "channel": "bol_ads", "type": "ads_change", "title": "Пополнен бюджет Bol; подтверждены настройки AutoMop (ACoS 25%)", "vis_after": 29, "vis_before": 20, "units_after": 1, "units_before": 0}], "last_csv_date": "2026-06-14"}');/*GROWTH_JSON_END*/
 (function(){
   if(!GROWTH){document.getElementById('growth-block').style.display='none';return;}
   const g=GROWTH;
   const pct=v=>v==null?'—':(v*100).toFixed(1)+'%';
-  setText('g-upd','обновлено '+g.updated);
-  const phase=g.goal>=100?'Фаза 3: цель 100/мес':g.goal>=50?'Фаза 2: цель 50/мес':'Фаза 1: цель '+g.goal+'/мес';
-  setText('g-phase',phase);
-  setText('g-mtd',g.units_mtd+' / '+g.goal);
-  setText('g-goal-txt',Math.round(g.units_mtd/g.goal*100)+'% цели месяца');
-  document.getElementById('g-bar').style.width=Math.min(100,g.units_mtd/g.goal*100)+'%';
-  setText('g-fc',g.forecast);
-  const fcEl=document.getElementById('g-fc-d');
-  fcEl.textContent=g.forecast>=g.goal?'▲ цель достижима':'▼ ниже цели '+g.goal;
-  fcEl.className='kpi-delta '+(g.forecast>=g.goal?'delta-pos':'delta-neg');
+  setText('g-upd','обновлено '+g.updated+' · заказы Bol/Amazon обновляются ежедневно');
+  const _now=new Date();
+  const _ym=_now.getFullYear()+'-'+String(_now.getMonth()+1).padStart(2,'0');
+  const _cg=CHANNEL_GOALS[_ym];
+  setText('g-phase', _cg ? ('План '+_ym+': Bol '+_cg.bol+' / Amazon '+_cg.amz) : 'План на '+_ym+' не задан');
+  renderChannelGoals();
   // последний полный месяц с данными CSV
   const months=Object.keys(g.monthly).sort();
   const lastCsvM=months.filter(m=>g.monthly[m].visits>0).pop();
@@ -625,11 +650,17 @@ function renderGrowth(start,end){
   const lastTacosM=months.filter(m=>g.monthly[m].tacos!=null).pop();
   setText('g-tacos',lastTacosM?pct(g.monthly[lastTacosM].tacos):'—');
   setText('g-data','РК: '+(g.campaigns_date||'—')+'\nCSV: '+(g.last_csv_date||'—'));
-  // график заказы vs цель
+  // график заказы vs цель — Bol и Amazon, живые данные MONTHLY + план CHANNEL_GOALS
+  const glMonths = Array.from(new Set([
+    ...(typeof MONTHLY!=='undefined' ? Object.keys(MONTHLY) : []),
+    ...Object.keys(CHANNEL_GOALS)
+  ])).sort();
   new Chart(document.getElementById('growthChart'),{type:'bar',
-    data:{labels:months,datasets:[
-      {label:'Заказы Bol',data:months.map(m=>g.monthly[m].orders||g.monthly[m].units),backgroundColor:'#0000a4',borderRadius:4,order:2},
-      {label:'Цель фазы',type:'line',data:months.map(m=>g.monthly[m].goal),borderColor:'#ef4444',borderDash:[6,4],pointRadius:0,borderWidth:2,order:1}
+    data:{labels:glMonths.map(m=>(typeof MONTH_LABELS!=='undefined'&&MONTH_LABELS[m])||m),datasets:[
+      {label:'Bol заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].bol_ord)||0),backgroundColor:'#0000a4',borderRadius:4,order:3},
+      {label:'Amazon заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].amz_ord)||0),backgroundColor:'#FF9900',borderRadius:4,order:3},
+      {label:'Цель Bol',type:'line',data:glMonths.map(m=>CHANNEL_GOALS[m]?CHANNEL_GOALS[m].bol:null),borderColor:'#0000a4',borderDash:[6,4],pointRadius:0,borderWidth:2,order:1},
+      {label:'Цель Amazon',type:'line',data:glMonths.map(m=>CHANNEL_GOALS[m]?CHANNEL_GOALS[m].amz:null),borderColor:'#FF9900',borderDash:[6,4],pointRadius:0,borderWidth:2,order:2}
     ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12}}},scales:{y:{beginAtZero:true}}}});
   // воронка: визиты (бары) + CVR (линия, правая ось)
