@@ -1,0 +1,8 @@
+# Секреты — не публиковать в git
+docs/BOL/Dashboard_marketplace/amazon_credentials.json
+docs/BOL/Dashboard_marketplace/bol_data.json
+# Локальный кэш bol.com (исторические данные, хранится только на PC)
+docs/BOL/Dashboard_marketplace/bol_cache.json
+# Служебные скрипты (только для локального использования)
+unlock_git.bat
+fix_git_and_push.ps1

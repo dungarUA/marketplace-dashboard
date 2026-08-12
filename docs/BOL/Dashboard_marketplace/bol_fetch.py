@@ -4,15 +4,27 @@ bol.com Retailer API — выгрузка данных для дашборда
 Требования: pip install requests
 """
 
-import requests, json
-from datetime import datetime
+import requests, json, os
+from datetime import datetime, timedelta
 
-CLIENT_ID     = "37e84817-0897-47fa-9a52-4cf0d629ff34"
-CLIENT_SECRET = "9V2VYFR2MT)R61fh2y8Nix?4TR6JnRyW1@vs4TtRBDTUAMeLQoNQsyOLPzQrKIzx"
+# ── Credentials (читаются из amazon_credentials.json, не хранятся в git) ─────
+def _load_creds():
+    creds_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "amazon_credentials.json")
+    if not os.path.exists(creds_path):
+        raise FileNotFoundError(
+            f"Файл с credentials не найден: {creds_path}\n"
+            "Создайте его по образцу amazon_credentials.json.example"
+        )
+    with open(creds_path, encoding="utf-8") as f:
+        return json.load(f)
+
+_creds        = _load_creds()
+CLIENT_ID     = _creds["bol_client_id"]
+CLIENT_SECRET = _creds["bol_client_secret"]
 
 # Абсолютный путь — файл всегда рядом со скриптом
-import os
 OUTPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bol_data.json")
+PII_RETENTION_DAYS = 30   # Amazon/bol DPP: удалять PII через 30 дней после доставки
 
 # ============================================================
 def get_token():
@@ -205,6 +217,55 @@ def fetch_offers(token):
     return all_offers
 
 # ============================================================
+# PII PURGE — удаление персональных данных старше 30 дней
+# (Amazon/bol.com Data Protection Policy, раздел 2.1 Data Retention)
+# ============================================================
+PII_FIELDS = ["billingDetails", "shipmentDetails"]
+
+def _order_ref_date(obj):
+    """Дата, от которой отсчитываем 30-дневный retention: дата отгрузки,
+    если её нет — дата размещения заказа."""
+    for key in ("shipmentDateTime", "orderPlacedDateTime"):
+        raw = obj.get(key)
+        if not raw:
+            continue
+        try:
+            # формат bol.com: 2026-06-15T10:33:29+02:00
+            return datetime.fromisoformat(raw)
+        except ValueError:
+            continue
+    return None
+
+def purge_old_pii(result, days=PII_RETENTION_DAYS):
+    """Стирает billingDetails/shipmentDetails у заказов/отгрузок/деталей заказов,
+    если с даты отгрузки (или размещения заказа) прошло больше `days` дней.
+    Возвращает количество очищенных записей."""
+    cutoff = datetime.now(datetime.now().astimezone().tzinfo) - timedelta(days=days)
+    purged = 0
+
+    def strip(obj):
+        nonlocal purged
+        changed = False
+        for f in PII_FIELDS:
+            if f in obj:
+                del obj[f]
+                changed = True
+        if changed:
+            purged += 1
+
+    for bucket in ("orders", "shipments", "order_details"):
+        for obj in result.get(bucket, []):
+            ref = _order_ref_date(obj) or _order_ref_date(obj.get("order", {}))
+            if ref and ref < cutoff:
+                strip(obj)
+                order = obj.get("order")
+                if isinstance(order, dict):
+                    strip(order)
+
+    return purged
+
+
+# ============================================================
 # MAIN
 # ============================================================
 def main():
@@ -281,6 +342,10 @@ def main():
         result["offers"] = fetch_offers(token)
     except Exception as e:
         print(f"  ❌ {e}")
+
+    print(f"\n🔒 Очистка PII старше {PII_RETENTION_DAYS} дней...")
+    purged = purge_old_pii(result)
+    print(f"   Очищено записей: {purged}")
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)

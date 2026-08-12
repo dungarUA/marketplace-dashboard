@@ -440,31 +440,6 @@
       "orderId": "C0006KNTLL",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-15T09:55:02+02:00",
-      "shipmentDetails": {
-        "salutation": "MALE",
-        "firstName": "Orhan",
-        "surname": "Özcelik",
-        "streetName": "Kalsdonksestraat",
-        "houseNumber": "59",
-        "zipCode": "4702ZB",
-        "city": "ROOSENDAAL",
-        "countryCode": "NL",
-        "email": "2esvlyjk6owmk2ntgoa5m65pumpg2e@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "MALE",
-        "firstName": "Orhan",
-        "surname": "Ozcelik",
-        "streetName": "Kalsdonksestraat",
-        "houseNumber": "153",
-        "houseNumberExtension": "C",
-        "zipCode": "4702ZD",
-        "city": "Roosendaal",
-        "countryCode": "NL",
-        "email": "2esvlyjk6owmk2ntgoa5m65pumpg2e@verkopen.bol.com",
-        "orderReference": "C0006KNTLL"
-      },
       "orderItems": [
         {
           "orderItemId": "3941177196",
@@ -498,30 +473,6 @@
       "orderId": "C0006M2KMW",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-12T12:45:54+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Federica",
-        "surname": "Tromp -Mathilda",
-        "streetName": "Mimosastraat",
-        "houseNumber": "24",
-        "zipCode": "6002TK",
-        "city": "WEERT",
-        "countryCode": "NL",
-        "email": "2zljpwkiaebq2ohfpxkquhjxorhtiw@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Federica",
-        "surname": "Tromp -Mathilda",
-        "streetName": "Mimosastraat",
-        "houseNumber": "24",
-        "zipCode": "6002TK",
-        "city": "WEERT",
-        "countryCode": "NL",
-        "email": "2zljpwkiaebq2ohfpxkquhjxorhtiw@verkopen.bol.com",
-        "orderReference": "C0006M2KMW"
-      },
       "orderItems": [
         {
           "orderItemId": "3939762289",
@@ -555,30 +506,6 @@
       "orderId": "C0006LT1MK",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-12T12:51:39+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Christiane",
-        "surname": "Wijnants",
-        "streetName": "Liersesteenweg",
-        "houseNumber": "93",
-        "zipCode": "2860",
-        "city": "Sint-Katelijne-Waver",
-        "countryCode": "BE",
-        "email": "275aa5w2smkx6zvdgpahw42zssac54@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Christiane",
-        "surname": "Wijnants",
-        "streetName": "Liersesteenweg",
-        "houseNumber": "93",
-        "zipCode": "2860",
-        "city": "Sint-Katelijne-Waver",
-        "countryCode": "BE",
-        "email": "275aa5w2smkx6zvdgpahw42zssac54@verkopen.bol.com",
-        "orderReference": "C0006LT1MK"
-      },
       "orderItems": [
         {
           "orderItemId": "3939765226",
@@ -612,30 +539,6 @@
       "orderId": "C0006MNPLC",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-12T22:02:36+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Meta",
-        "surname": "von Hout",
-        "streetName": "Wiekslag",
-        "houseNumber": "3",
-        "zipCode": "4241XV",
-        "city": "ARKEL",
-        "countryCode": "NL",
-        "email": "2xcewyob4nqkx6xtzia45ncibe3zno@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Meta",
-        "surname": "von Hout",
-        "streetName": "Wiekslag",
-        "houseNumber": "3",
-        "zipCode": "4241XV",
-        "city": "ARKEL",
-        "countryCode": "NL",
-        "email": "2xcewyob4nqkx6xtzia45ncibe3zno@verkopen.bol.com",
-        "orderReference": "C0006MNPLC"
-      },
       "orderItems": [
         {
           "orderItemId": "3940050629",
@@ -669,30 +572,6 @@
       "orderId": "C0006JPPNC",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-10T17:41:23+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Jeanette",
-        "surname": "Vaartjes",
-        "streetName": "Visserwei",
-        "houseNumber": "48",
-        "zipCode": "8407EZ",
-        "city": "TERWISPEL",
-        "countryCode": "NL",
-        "email": "2yzaztqoniuak73wujffzitsaaxjps@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Jeanette",
-        "surname": "Vaartjes",
-        "streetName": "Visserwei",
-        "houseNumber": "48",
-        "zipCode": "8407EZ",
-        "city": "TERWISPEL",
-        "countryCode": "NL",
-        "email": "2yzaztqoniuak73wujffzitsaaxjps@verkopen.bol.com",
-        "orderReference": "C0006JPPNC"
-      },
       "orderItems": [
         {
           "orderItemId": "3938790389",
@@ -726,30 +605,6 @@
       "orderId": "C0006FJJ6F",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-09T07:21:47+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Saskia",
-        "surname": "Windig",
-        "streetName": "Dorpsdijk",
-        "houseNumber": "18",
-        "zipCode": "3161KE",
-        "city": "RHOON",
-        "countryCode": "NL",
-        "email": "2wdd37v7l4xl5vqhrhftd3dws3al6m@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Saskia",
-        "surname": "Windig",
-        "streetName": "Dorpsdijk",
-        "houseNumber": "18",
-        "zipCode": "3161KE",
-        "city": "RHOON",
-        "countryCode": "NL",
-        "email": "2wdd37v7l4xl5vqhrhftd3dws3al6m@verkopen.bol.com",
-        "orderReference": "C0006FJJ6F"
-      },
       "orderItems": [
         {
           "orderItemId": "3937833619",
@@ -783,30 +638,6 @@
       "orderId": "C00068D75M",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-05T17:00:20+02:00",
-      "shipmentDetails": {
-        "salutation": "UNKNOWN",
-        "firstName": "Joke",
-        "surname": "Giesen",
-        "streetName": "Lokhorst",
-        "houseNumber": "51",
-        "zipCode": "2352KE",
-        "city": "Leiderdorp",
-        "countryCode": "NL",
-        "email": "2vfmtzja6xwxr6qtjtimrfil56qkec@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Esther",
-        "surname": "Giesen",
-        "streetName": "Meloenpad",
-        "houseNumber": "15",
-        "zipCode": "2292BJ",
-        "city": "WATERINGEN",
-        "countryCode": "NL",
-        "email": "2vfmtzja6xwxr6qtjtimrfil56qkec@verkopen.bol.com",
-        "orderReference": "C00068D75M"
-      },
       "orderItems": [
         {
           "orderItemId": "3935977148",
@@ -840,30 +671,6 @@
       "orderId": "C00065M7KH",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-06-03T15:08:13+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Margo",
-        "surname": "Kadiyeva",
-        "streetName": "Hert. van Brabantstraat",
-        "houseNumber": "8",
-        "zipCode": "5552KV",
-        "city": "VALKENSWAARD",
-        "countryCode": "NL",
-        "email": "2wgkxqvfxa5634p7ss5ibrjl2rhvys@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Margo",
-        "surname": "Kadiyeva",
-        "streetName": "Hert. van Brabantstraat",
-        "houseNumber": "8",
-        "zipCode": "5552KV",
-        "city": "VALKENSWAARD",
-        "countryCode": "NL",
-        "email": "2wgkxqvfxa5634p7ss5ibrjl2rhvys@verkopen.bol.com",
-        "orderReference": "C00065M7KH"
-      },
       "orderItems": [
         {
           "orderItemId": "3934779845",
@@ -897,30 +704,6 @@
       "orderId": "C00060XP56",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-05-30T22:39:11+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Nathalie",
-        "surname": "Mensinga",
-        "streetName": "Tamarstraat",
-        "houseNumber": "5",
-        "zipCode": "3207AM",
-        "city": "SPIJKENISSE",
-        "countryCode": "NL",
-        "email": "2lnpcgxwbbyeta4o6okviqrx7wbr2a@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Nathalie",
-        "surname": "Mensinga",
-        "streetName": "Tamarstraat",
-        "houseNumber": "5",
-        "zipCode": "3207AM",
-        "city": "SPIJKENISSE",
-        "countryCode": "NL",
-        "email": "2lnpcgxwbbyeta4o6okviqrx7wbr2a@verkopen.bol.com",
-        "orderReference": "C00060XP56"
-      },
       "orderItems": [
         {
           "orderItemId": "3932611950",
@@ -954,30 +737,6 @@
       "orderId": "C0005947CJ",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-05-19T13:29:12+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "m",
-        "surname": "blankevoort",
-        "streetName": "Johannes Jelgerhuishof",
-        "houseNumber": "25",
-        "zipCode": "1065TN",
-        "city": "AMSTERDAM",
-        "countryCode": "NL",
-        "email": "23i2sb4b2gvr4hjnzv22mrojhpjcty@verkopen.bol.com",
-        "language": "nl"
-      },
-      "billingDetails": {
-        "salutation": "FEMALE",
-        "firstName": "m",
-        "surname": "blankevoort",
-        "streetName": "Johannes Jelgerhuishof",
-        "houseNumber": "25",
-        "zipCode": "1065TN",
-        "city": "AMSTERDAM",
-        "countryCode": "NL",
-        "email": "23i2sb4b2gvr4hjnzv22mrojhpjcty@verkopen.bol.com",
-        "orderReference": "C0005947CJ"
-      },
       "orderItems": [
         {
           "orderItemId": "3925347068",
@@ -1011,18 +770,6 @@
       "orderId": "C0004T948N",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-05-16T01:53:34+02:00",
-      "shipmentDetails": {
-        "salutation": "UNKNOWN",
-        "firstName": "Nadiia",
-        "surname": "Sliusar",
-        "streetName": "Venrayseweg",
-        "houseNumber": "109",
-        "zipCode": "5928RG",
-        "city": "Venlo",
-        "countryCode": "NL",
-        "email": "2ixmhepgatse2wb5cqu76wmc5yi7sa@verkopen.bol.com",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3923675013",
@@ -1056,18 +803,6 @@
       "orderId": "C000392WD5",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-05-08T21:54:11+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Karin",
-        "surname": "Ruijzing",
-        "streetName": "Daan Schammerstraat",
-        "houseNumber": "24",
-        "zipCode": "3084MB",
-        "city": "ROTTERDAM",
-        "countryCode": "NL",
-        "email": "2k2chw7xqsj53xxtbbl47vymrykr2g@verkopen.bol.com",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3920195121",
@@ -1101,19 +836,6 @@
       "orderId": "C000417TRR",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-22T15:07:00+02:00",
-      "shipmentDetails": {
-        "salutation": "MALE",
-        "firstName": "eric",
-        "surname": "v hulsel",
-        "streetName": "Oranjeboomstraat",
-        "houseNumber": "148",
-        "zipCode": "4812EL",
-        "city": "BREDA",
-        "countryCode": "NL",
-        "email": "2ydy7v7jjd3ragke6y6k6j4hpqjcsw@verkopen.bol.com",
-        "company": "---",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3911368715",
@@ -1147,18 +869,6 @@
       "orderId": "C0003NMD8M",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-16T16:03:45+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Inez",
-        "surname": "Visser-Vink",
-        "streetName": "Peppinghof",
-        "houseNumber": "9",
-        "zipCode": "1391BA",
-        "city": "ABCOUDE",
-        "countryCode": "NL",
-        "email": "2togo7h6mqmfgytqsdnganzkwteti2@verkopen.bol.com",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3908451020",
@@ -1192,17 +902,6 @@
       "orderId": "C0003D4LX1",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-09T21:06:43+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Zahra",
-        "surname": "Hosseini",
-        "streetName": "Burgemeester Liesestraat",
-        "houseNumber": "5",
-        "zipCode": "9648BS",
-        "city": "Wildervank",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3905124595",
@@ -1236,18 +935,6 @@
       "orderId": "C00032C70H",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-09T18:22:51+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Petra",
-        "surname": "Wassenaar",
-        "streetName": "Julianastraat",
-        "houseNumber": "62",
-        "houseNumberExtension": "A",
-        "zipCode": "2161RE",
-        "city": "LISSE",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3905036978",
@@ -1281,17 +968,6 @@
       "orderId": "C00035MX7D",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-04T18:47:45+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Busra",
-        "surname": "Ulusoy",
-        "streetName": "Royaardsplein",
-        "houseNumber": "150",
-        "zipCode": "3123AS",
-        "city": "Schiedam",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3902688061",
@@ -1325,17 +1001,6 @@
       "orderId": "C00035LP9N",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-04T17:48:55+02:00",
-      "shipmentDetails": {
-        "salutation": "MALE",
-        "firstName": "Jan",
-        "surname": "Oosterling",
-        "streetName": "Koning Davidstraat",
-        "houseNumber": "25",
-        "zipCode": "1502NV",
-        "city": "ZAANDAM",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3902667287",
@@ -1369,17 +1034,6 @@
       "orderId": "C00033TL8N",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-04-02T21:16:11+02:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "Gelas",
-        "surname": "Hassan",
-        "streetName": "Vuurvlinderstraat",
-        "houseNumber": "86",
-        "zipCode": "5641DN",
-        "city": "Eindhoven",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3901894371",
@@ -1413,17 +1067,6 @@
       "orderId": "C0002R8CM3",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-03-27T19:12:46+01:00",
-      "shipmentDetails": {
-        "salutation": "MALE",
-        "firstName": "Flip",
-        "surname": "de Zwart",
-        "streetName": "Montaubanstraat",
-        "houseNumber": "82",
-        "zipCode": "3701HX",
-        "city": "ZEIST",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3898531288",
@@ -1457,17 +1100,6 @@
       "orderId": "C0002K06TH",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-03-24T10:05:29+01:00",
-      "shipmentDetails": {
-        "salutation": "UNKNOWN",
-        "firstName": "Isabelle",
-        "surname": "Coppens",
-        "streetName": "Monumentstraat",
-        "houseNumber": "7",
-        "zipCode": "9940",
-        "city": "Ertvelde",
-        "countryCode": "BE",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3896085034",
@@ -1501,17 +1133,6 @@
       "orderId": "C0002DPFMJ",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-03-21T17:41:36+01:00",
-      "shipmentDetails": {
-        "salutation": "FEMALE",
-        "firstName": "annet",
-        "surname": "sandee",
-        "streetName": "Weerhaan",
-        "houseNumber": "18",
-        "zipCode": "4336KS",
-        "city": "MIDDELBURG",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3894629088",
@@ -1545,17 +1166,6 @@
       "orderId": "C0002D4DMK",
       "pickupPoint": false,
       "orderPlacedDateTime": "2026-03-20T23:15:45+01:00",
-      "shipmentDetails": {
-        "salutation": "MALE",
-        "firstName": "Robel",
-        "surname": "Weldemariam",
-        "streetName": "De Lemzijde",
-        "houseNumber": "165",
-        "zipCode": "7823SM",
-        "city": "Emmen",
-        "countryCode": "NL",
-        "language": "nl"
-      },
       "orderItems": [
         {
           "orderItemId": "3894357840",
