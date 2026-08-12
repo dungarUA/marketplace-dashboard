@@ -103,6 +103,26 @@ td{padding:8px 10px;border-bottom:1px solid #f0f2f5;color:#333;}
       <div style="display:flex;gap:8px;align-items:center;">
         <span class="card-tag" id="g-upd">—</span>
         <span class="card-tag" style="background:#e0e7ff;color:#3730a3;" id="g-phase">—</span>
+        <button id="g-goals-toggle" style="border:1px solid #cbd5e1;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">✏️ Изменить цели</button>
+      </div>
+    </div>
+    <div id="g-goals-editor" style="display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin-bottom:14px;">
+      <div style="font-size:12px;color:#64748b;margin-bottom:8px;">Цели по месяцам (шт. заказов). Сохраняется в этом браузере.</div>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <thead><tr>
+          <th style="text-align:left;padding:4px;">Месяц</th>
+          <th style="text-align:left;padding:4px;">Bol</th>
+          <th style="text-align:left;padding:4px;">Amazon</th>
+          <th></th>
+        </tr></thead>
+        <tbody id="g-goals-tbody"></tbody>
+      </table>
+      <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
+        <input id="g-goals-new-month" type="month" style="padding:4px 6px;border:1px solid #cbd5e1;border-radius:4px;font-size:13px;">
+        <button id="g-goals-add" style="border:1px solid #cbd5e1;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">+ Добавить месяц</button>
+        <span style="flex:1;"></span>
+        <button id="g-goals-reset" style="border:1px solid #cbd5e1;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Сбросить к умолчанию</button>
+        <button id="g-goals-save" style="border:none;background:#0000a4;color:#fff;border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;font-weight:600;">Сохранить</button>
       </div>
     </div>
     <div class="kpi-row" style="margin-bottom:14px;">
@@ -589,7 +609,7 @@ function renderGrowth(start,end){
   setText('g-tacos',md&&md.tacos!=null?pct(md.tacos):'—');
 }
 
-// ── Цели по каналам (Bol / Amazon), план авг–дек 2026 ──────────────────────
+// ── Цели по каналам (Bol / Amazon), план авг–дек 2026 (умолчания) ──────────
 const CHANNEL_GOALS = {
   '2026-08': {bol:10, amz:10},
   '2026-09': {bol:15, amz:15},
@@ -597,11 +617,27 @@ const CHANNEL_GOALS = {
   '2026-11': {bol:35, amz:35},
   '2026-12': {bol:50, amz:50}
 };
+const GOALS_LS_KEY = 'cleanwin_channel_goals';
+function loadGoalsOverride(){
+  try{ const raw=localStorage.getItem(GOALS_LS_KEY); return raw?JSON.parse(raw):{}; }
+  catch(e){ return {}; }
+}
+function saveGoalsOverride(obj){
+  try{ localStorage.setItem(GOALS_LS_KEY, JSON.stringify(obj)); }catch(e){}
+}
+function getEffectiveGoals(){
+  const override = loadGoalsOverride();
+  const merged = {};
+  for(const m of new Set([...Object.keys(CHANNEL_GOALS), ...Object.keys(override)])){
+    merged[m] = {...(CHANNEL_GOALS[m]||{bol:0,amz:0}), ...(override[m]||{})};
+  }
+  return merged;
+}
 
 function renderChannelGoals(){
   const now = new Date();
   const ym = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
-  const goals = CHANNEL_GOALS[ym];
+  const goals = getEffectiveGoals()[ym];
   const md = (typeof MONTHLY!=='undefined' && MONTHLY[ym]) ? MONTHLY[ym] : null;
   const bolDone = md ? (md.bol_ord||0) : 0;
   const amzDone = md ? (md.amz_ord||0) : 0;
@@ -628,6 +664,110 @@ function renderChannelGoals(){
   fillCard('amz', amzDone, goals ? goals.amz : null);
 }
 
+let _growthOrdersChart = null;
+function renderGrowthOrdersChart(){
+  const eff = getEffectiveGoals();
+  const glMonths = Array.from(new Set([
+    ...(typeof MONTHLY!=='undefined' ? Object.keys(MONTHLY) : []),
+    ...Object.keys(eff)
+  ])).sort();
+  const data = {
+    labels:glMonths.map(m=>(typeof MONTH_LABELS!=='undefined'&&MONTH_LABELS[m])||m),
+    datasets:[
+      {label:'Bol заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].bol_ord)||0),backgroundColor:'#0000a4',borderRadius:4,order:3},
+      {label:'Amazon заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].amz_ord)||0),backgroundColor:'#FF9900',borderRadius:4,order:3},
+      {label:'Цель Bol',type:'line',data:glMonths.map(m=>eff[m]?eff[m].bol:null),borderColor:'#0000a4',borderDash:[6,4],pointRadius:0,borderWidth:2,order:1},
+      {label:'Цель Amazon',type:'line',data:glMonths.map(m=>eff[m]?eff[m].amz:null),borderColor:'#FF9900',borderDash:[6,4],pointRadius:0,borderWidth:2,order:2}
+    ]
+  };
+  if(_growthOrdersChart){ _growthOrdersChart.destroy(); }
+  _growthOrdersChart = new Chart(document.getElementById('growthChart'),{type:'bar',data,
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12}}},scales:{y:{beginAtZero:true}}}});
+}
+
+// ── Панель редактирования целей ─────────────────────────────────────────
+function renderGoalsEditor(){
+  const tbody = document.getElementById('g-goals-tbody');
+  if(!tbody) return;
+  const eff = getEffectiveGoals();
+  const months = Object.keys(eff).sort();
+  tbody.innerHTML = months.map(m=>`
+    <tr data-month="${m}">
+      <td style="padding:4px;">${(typeof MONTH_LABELS!=='undefined'&&MONTH_LABELS[m])||m}</td>
+      <td style="padding:4px;"><input type="number" min="0" class="g-goal-bol" value="${eff[m].bol}" style="width:70px;padding:3px 6px;border:1px solid #cbd5e1;border-radius:4px;"></td>
+      <td style="padding:4px;"><input type="number" min="0" class="g-goal-amz" value="${eff[m].amz}" style="width:70px;padding:3px 6px;border:1px solid #cbd5e1;border-radius:4px;"></td>
+      <td style="padding:4px;"><button class="g-goal-del" style="border:none;background:none;color:#ef4444;cursor:pointer;font-size:14px;" title="Удалить месяц">✕</button></td>
+    </tr>`).join('');
+  tbody.querySelectorAll('.g-goal-del').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ btn.closest('tr').remove(); });
+  });
+}
+
+function initGoalsEditorEvents(){
+  const toggle = document.getElementById('g-goals-toggle');
+  const panel  = document.getElementById('g-goals-editor');
+  if(toggle && panel){
+    toggle.addEventListener('click', ()=>{
+      const open = panel.style.display !== 'none';
+      if(!open){ renderGoalsEditor(); }
+      panel.style.display = open ? 'none' : 'block';
+      toggle.textContent = open ? '✏️ Изменить цели' : '✕ Закрыть';
+    });
+  }
+  const addBtn = document.getElementById('g-goals-add');
+  if(addBtn){
+    addBtn.addEventListener('click', ()=>{
+      const inp = document.getElementById('g-goals-new-month');
+      const val = inp.value; // "2027-01"
+      if(!val) return;
+      const tbody = document.getElementById('g-goals-tbody');
+      if(tbody.querySelector(`tr[data-month="${val}"]`)){ inp.value=''; return; }
+      const tr = document.createElement('tr');
+      tr.dataset.month = val;
+      tr.innerHTML = `
+        <td style="padding:4px;">${val}</td>
+        <td style="padding:4px;"><input type="number" min="0" class="g-goal-bol" value="0" style="width:70px;padding:3px 6px;border:1px solid #cbd5e1;border-radius:4px;"></td>
+        <td style="padding:4px;"><input type="number" min="0" class="g-goal-amz" value="0" style="width:70px;padding:3px 6px;border:1px solid #cbd5e1;border-radius:4px;"></td>
+        <td style="padding:4px;"><button class="g-goal-del" style="border:none;background:none;color:#ef4444;cursor:pointer;font-size:14px;" title="Удалить месяц">✕</button></td>`;
+      tr.querySelector('.g-goal-del').addEventListener('click', ()=>tr.remove());
+      tbody.appendChild(tr);
+      inp.value = '';
+    });
+  }
+  const saveBtn = document.getElementById('g-goals-save');
+  if(saveBtn){
+    saveBtn.addEventListener('click', ()=>{
+      const tbody = document.getElementById('g-goals-tbody');
+      const override = {};
+      tbody.querySelectorAll('tr').forEach(tr=>{
+        const m = tr.dataset.month;
+        const bol = parseInt(tr.querySelector('.g-goal-bol').value, 10) || 0;
+        const amz = parseInt(tr.querySelector('.g-goal-amz').value, 10) || 0;
+        override[m] = {bol, amz};
+      });
+      saveGoalsOverride(override);
+      renderChannelGoals();
+      renderGrowthOrdersChart();
+      const _now2=new Date();
+      const _ym2=_now2.getFullYear()+'-'+String(_now2.getMonth()+1).padStart(2,'0');
+      const _cg2=getEffectiveGoals()[_ym2];
+      setText('g-phase', _cg2 ? ('План '+_ym2+': Bol '+_cg2.bol+' / Amazon '+_cg2.amz) : 'План на '+_ym2+' не задан');
+      saveBtn.textContent = '✓ Сохранено';
+      setTimeout(()=>{ saveBtn.textContent='Сохранить'; }, 1500);
+    });
+  }
+  const resetBtn = document.getElementById('g-goals-reset');
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      if(!confirm('Сбросить все изменённые цели к значениям по умолчанию?')) return;
+      localStorage.removeItem(GOALS_LS_KEY);
+      renderGoalsEditor();
+      renderChannelGoals();
+      renderGrowthOrdersChart();
+    });
+  }
+}
+
 /*GROWTH_JSON_START*/const GROWTH=JSON.parse('{"updated": "02.07.2026 10:31", "goal": 30, "goals": {"phase1": 30, "phase2": 50, "phase3": 100}, "month": "2026-07", "units_mtd": 0, "forecast": 0, "breakeven_acos": 0.27, "monthly": {"2025-11": {"units": 6, "visits": 248, "orders": 0, "rev": 0.0, "cvr": 0.0242, "goal": 30, "tacos": null}, "2025-12": {"units": 23, "visits": 1240, "orders": 0, "rev": 0.0, "cvr": 0.0185, "goal": 30, "tacos": null}, "2026-01": {"units": 13, "visits": 217, "orders": 0, "rev": 0.0, "cvr": 0.0599, "goal": 30, "tacos": null}, "2026-02": {"units": 6, "visits": 125, "orders": 0, "rev": 0.0, "cvr": 0.048, "goal": 30, "tacos": null}, "2026-03": {"units": 6, "visits": 119, "orders": 0, "rev": 0.0, "cvr": 0.0504, "goal": 30, "tacos": null}, "2026-04": {"units": 7, "visits": 159, "orders": 7, "rev": 195.93, "cvr": 0.044, "goal": 30, "tacos": 0.0533}, "2026-05": {"units": 4, "visits": 140, "orders": 3, "rev": 83.97, "cvr": 0.0286, "goal": 30, "tacos": 0.3502}, "2026-06": {"units": 8, "visits": 82, "orders": 11, "rev": 329.88, "cvr": 0.0976, "goal": 30, "tacos": 0.0863}, "2026-07": {"units": 0, "visits": 0, "orders": 0, "rev": 0.0, "cvr": null, "goal": 30, "tacos": null}}, "campaigns": [{"name": "AutoMop", "state": "Active", "type": "Automatic", "impressions": 11078.0, "clicks": 516.0, "cpc": 0.38, "conv": 34.0, "rev": 707.06, "spent": 198.04, "acos": 0.2801}, {"name": "Auto Wallonie_17122025", "state": "Active", "type": "Automatic", "impressions": 660.0, "clicks": 43.0, "cpc": 0.3, "conv": 1.0, "rev": 23.13, "spent": 12.72, "acos": 0.5499}, {"name": "Proven Winners_mixed_16122025", "state": "Active", "type": "Manual", "impressions": 85.0, "clicks": 9.0, "cpc": 0.67, "conv": 0.0, "rev": 0.0, "spent": 6.06, "acos": null}, {"name": "Full_Partial match", "state": "Paused", "type": "Manual", "impressions": 3417.0, "clicks": 56.0, "cpc": 1.47, "conv": 2.0, "rev": 39.64, "spent": 82.27, "acos": 2.0754}, {"name": "Full_Exact match", "state": "Paused", "type": "Manual", "impressions": 236.0, "clicks": 6.0, "cpc": 2.23, "conv": 1.0, "rev": 13.21, "spent": 13.37, "acos": 1.0121}], "campaigns_date": "2026-07-01", "deltas": [{"name": "AutoMop", "from": "2026-04-20", "to": "2026-07-01", "spent": 53.65, "rev": 254.43, "conv": 11.0, "clicks": 149.0, "acos": 0.2109}, {"name": "Auto Wallonie_17122025", "from": "2026-04-20", "to": "2026-07-01", "spent": 11.87, "rev": 23.13, "conv": 1.0, "clicks": 41.0, "acos": 0.5132}, {"name": "Proven Winners_mixed_16122025", "from": "2026-04-20", "to": "2026-07-01", "spent": 2.78, "rev": 0.0, "conv": 0.0, "clicks": 3.0, "acos": null}], "events": [{"date": "2026-07-01", "channel": "bol_ads", "type": "ads_change", "title": "AutoMop ACoS 25→33%; MAN_Exact_NL/FR; архив Full_Partial/Full_Exact", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-07-01", "channel": "listing", "type": "listing_change", "title": "Новый заголовок и буллеты NL/FR опубликованы", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-07-01", "channel": "bol_ads", "type": "negatives", "title": "Негатив swiffer в AutoMop + негативы Auto Wallonie", "vis_after": 0, "vis_before": 0, "units_after": 0, "units_before": 0}, {"date": "2026-06-13", "channel": "organic", "type": "spike", "title": "Всплеск 3 заказа/день — органика (подтверждено дневными данными)", "vis_after": 8, "vis_before": 17, "units_after": 0, "units_before": 5}, {"date": "2026-04-20", "channel": "bol_ads", "type": "ads_change", "title": "Пополнен бюджет Bol; подтверждены настройки AutoMop (ACoS 25%)", "vis_after": 29, "vis_before": 20, "units_after": 1, "units_before": 0}], "last_csv_date": "2026-06-14"}');/*GROWTH_JSON_END*/
 (function(){
   if(!GROWTH){document.getElementById('growth-block').style.display='none';return;}
@@ -636,9 +776,10 @@ function renderChannelGoals(){
   setText('g-upd','обновлено '+g.updated+' · заказы Bol/Amazon обновляются ежедневно');
   const _now=new Date();
   const _ym=_now.getFullYear()+'-'+String(_now.getMonth()+1).padStart(2,'0');
-  const _cg=CHANNEL_GOALS[_ym];
+  const _cg=getEffectiveGoals()[_ym];
   setText('g-phase', _cg ? ('План '+_ym+': Bol '+_cg.bol+' / Amazon '+_cg.amz) : 'План на '+_ym+' не задан');
   renderChannelGoals();
+  initGoalsEditorEvents();
   // последний полный месяц с данными CSV
   const months=Object.keys(g.monthly).sort();
   const lastCsvM=months.filter(m=>g.monthly[m].visits>0).pop();
@@ -650,19 +791,8 @@ function renderChannelGoals(){
   const lastTacosM=months.filter(m=>g.monthly[m].tacos!=null).pop();
   setText('g-tacos',lastTacosM?pct(g.monthly[lastTacosM].tacos):'—');
   setText('g-data','РК: '+(g.campaigns_date||'—')+'\nCSV: '+(g.last_csv_date||'—'));
-  // график заказы vs цель — Bol и Amazon, живые данные MONTHLY + план CHANNEL_GOALS
-  const glMonths = Array.from(new Set([
-    ...(typeof MONTHLY!=='undefined' ? Object.keys(MONTHLY) : []),
-    ...Object.keys(CHANNEL_GOALS)
-  ])).sort();
-  new Chart(document.getElementById('growthChart'),{type:'bar',
-    data:{labels:glMonths.map(m=>(typeof MONTH_LABELS!=='undefined'&&MONTH_LABELS[m])||m),datasets:[
-      {label:'Bol заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].bol_ord)||0),backgroundColor:'#0000a4',borderRadius:4,order:3},
-      {label:'Amazon заказы',data:glMonths.map(m=>(MONTHLY[m]&&MONTHLY[m].amz_ord)||0),backgroundColor:'#FF9900',borderRadius:4,order:3},
-      {label:'Цель Bol',type:'line',data:glMonths.map(m=>CHANNEL_GOALS[m]?CHANNEL_GOALS[m].bol:null),borderColor:'#0000a4',borderDash:[6,4],pointRadius:0,borderWidth:2,order:1},
-      {label:'Цель Amazon',type:'line',data:glMonths.map(m=>CHANNEL_GOALS[m]?CHANNEL_GOALS[m].amz:null),borderColor:'#FF9900',borderDash:[6,4],pointRadius:0,borderWidth:2,order:2}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},boxWidth:12}}},scales:{y:{beginAtZero:true}}}});
+  // график заказы vs цель — Bol и Amazon, живые данные MONTHLY + план (с учётом сохранённых правок)
+  renderGrowthOrdersChart();
   // воронка: визиты (бары) + CVR (линия, правая ось)
   const vm=months.filter(m=>g.monthly[m].visits>0);
   new Chart(document.getElementById('funnelChart'),{type:'bar',
